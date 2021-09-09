@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,39 +13,61 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="lab1" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hybridizer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXa-E8-yFk">
-                                <rect key="frame" x="58" y="102" width="298" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hybridizer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXa-E8-yFk">
+                                <rect key="frame" x="58" y="58" width="298" height="64"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="IAq-w0-d0m"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZF-M9-HZK">
-                                <rect key="frame" x="44" y="174" width="166" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Dino Hybrid"/>
-                                <connections>
-                                    <action selector="makeHybrid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="szI-Br-cZs"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="duckHorse" translatesAutoresizingMaskIntoConstraints="NO" id="beO-7u-unD">
-                                <rect key="frame" x="44" y="269" width="327" height="418"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="150" translatesAutoresizingMaskIntoConstraints="NO" id="vW9-we-1dg">
+                                <rect key="frame" x="54.666666666666657" y="108" width="305" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eZF-M9-HZK">
+                                        <rect key="frame" x="0.0" y="0.0" width="81" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="E45-e6-HzI"/>
+                                        </constraints>
+                                        <state key="normal" title="Dino Hybrid"/>
+                                        <connections>
+                                            <action selector="makeHybrid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="szI-Br-cZs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvh-Xz-fR9">
+                                        <rect key="frame" x="231" y="0.0" width="74" height="50"/>
+                                        <state key="normal" title="Cat Hybrid"/>
+                                        <connections>
+                                            <action selector="makeHybrid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cww-a7-C0F"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="duckHorse" translatesAutoresizingMaskIntoConstraints="NO" id="beO-7u-unD">
+                                <rect key="frame" x="0.0" y="183" width="414" height="560.33333333333337"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" secondItem="beO-7u-unD" secondAttribute="height" multiplier="147:199" id="1Gk-vj-5mg"/>
+                                </constraints>
                             </imageView>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qvh-Xz-fR9">
-                                <rect key="frame" x="205" y="174" width="166" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cat Hybrid"/>
-                                <connections>
-                                    <action selector="makeHybrid:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Cww-a7-C0F"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="beO-7u-unD" firstAttribute="top" secondItem="vW9-we-1dg" secondAttribute="top" constant="75" id="2aW-st-ZMj"/>
+                            <constraint firstItem="SXa-E8-yFk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="DXF-nv-LfB"/>
+                            <constraint firstItem="vW9-we-1dg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="G52-na-Zd4"/>
+                            <constraint firstItem="SXa-E8-yFk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="QM0-Su-7nK"/>
+                            <constraint firstItem="beO-7u-unD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" priority="750" id="REV-O8-ksG"/>
+                            <constraint firstItem="SXa-E8-yFk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="58" id="Sj7-jS-wUa"/>
+                            <constraint firstItem="vW9-we-1dg" firstAttribute="top" secondItem="SXa-E8-yFk" secondAttribute="top" constant="50" id="Td3-CU-39M"/>
+                            <constraint firstItem="SXa-E8-yFk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bO9-23-2y9"/>
+                            <constraint firstItem="SXa-E8-yFk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="i2a-TI-WTU"/>
+                            <constraint firstItem="beO-7u-unD" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="jPy-3v-b4E"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="hybridImg" destination="beO-7u-unD" id="Rsj-AI-MQx"/>
