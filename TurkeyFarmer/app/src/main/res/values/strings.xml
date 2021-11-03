@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">TurkeyFarmer</string>
+    <string name="carveTurkeyText">Carve Turkey</string>
+    <string name="editName">Name your turkey</string>
+</resources>
