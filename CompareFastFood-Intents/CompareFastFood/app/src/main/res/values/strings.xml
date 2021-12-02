@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">CompareFastFood</string>
+    <string name="header">Fast Food Compare Tool</string>
+    <string name="restaurantDescription">restaurant</string>
+    <string name="drinkDescription">choose drink</string>
+    <string name="cokeDrink">Coke</string>
+    <string name="spriteDrink">Sprite</string>
+    <string name="desserts">Add-ons</string>
+    <string name="iceCream">Vanilla Cone</string>
+    <string name="cookie">Chocolate Cookie</string>
+    <string name="largeSize">Large Meal</string>
+    <string name="meal">Choose Meal</string>
+    <string name="meadDescription">meal description</string>
+    <string name="burger">Burger</string>
+    <string name="crispyChicken">Crispy Chicken</string>
+    <string name="nuggets">Nuggets</string>
+    <string name="result">"The calorie count from the selected options and a side of fries is: "</string>
+    <string name="largeSwitch">Large</string>
+    <string name="buttonText">calculate calories</string>
+    <string name="drPepper">Dr. Pepper</string>
+    <string name="showResourceBtnTxt">Show Resource</string>
+    <string-array name="restaurants">
+        <item>"McDonald's"</item>
+        <item>"Burger King"</item>
+        <item>"Wendy's"</item>
+    </string-array>
+    <string name="title_activity_resource">ResourceActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="calActivityText">"The number of calories of your selected meal is: "</string>
+    <string name="hyperLinkText">Click here to go to view the nutrition information</string>
+    <string name="diabetesView">worth the diabetes?</string>
+
+</resources>
