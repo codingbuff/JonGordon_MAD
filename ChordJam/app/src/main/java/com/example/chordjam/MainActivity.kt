@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
     val oPattern4 = Pattern(arrayOf(1,3,6,5),arrayOf("maj","7","min","maj"))
     //create jams
     val rockJams = ChordProgression("Rock", arrayOf(rPattern1,rPattern2,rPattern3,rPattern4))
-    val popJams = ChordProgression("Rock", arrayOf(pPattern1,pPattern2,pPattern3,pPattern4))
-    val jazzJams = ChordProgression("Rock", arrayOf(jPattern1,jPattern2,jPattern3,jPattern4))
-    val otherJams = ChordProgression("Rock", arrayOf(oPattern1,oPattern2,oPattern3,oPattern4))
+    val popJams = ChordProgression("Pop", arrayOf(pPattern1,pPattern2,pPattern3,pPattern4))
+    val jazzJams = ChordProgression("Jazz", arrayOf(jPattern1,jPattern2,jPattern3,jPattern4))
+    val otherJams = ChordProgression("Other", arrayOf(oPattern1,oPattern2,oPattern3,oPattern4))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
