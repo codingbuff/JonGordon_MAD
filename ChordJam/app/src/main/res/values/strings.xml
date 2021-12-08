@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">ChordJam</string>
+    <string name="startingKeyText">Starting key</string>
+    <string name="styleTextView">Style</string>
+    <string name="styleDescription">Select the song genre style</string>
+    <string name="keyDescription">Select which key you want to start with</string>
+    <string name="patternText">Pattern</string>
+    <string name="jamBtnTxt">Create Jam</string>
+    <string name="firstChordTxt" />
+    <string name="secondChordTxt" />
+    <string name="thirdChordTxt" />
+    <string name="fourthChordTxt" />
+    <string-array name="keyOptions">
+        <item>"A"</item>
+        <item>"A#/Bb"</item>
+        <item>"B"</item>
+        <item>"C"</item>
+        <item>"C#/Db"</item>
+        <item>"D"</item>
+        <item>"D#/Eb"</item>
+        <item>"E"</item>
+        <item>"F"</item>
+        <item>"F#/Gb"</item>
+        <item>"G"</item>
+        <item>"G#/Ab"</item>
+    </string-array>
+
+    <string-array name="styleOptions">
+        <item>"Rock"</item>
+        <item>"Pop"</item>
+        <item>"Jazz"</item>
+        <item>"Other"</item>
+    </string-array>
+
+    <string-array name="patternOptions">
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+    </string-array>
+</resources>

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primaryLightColor"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/fourthChord"
+        android:layout_width="151dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/libre_baskerville_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/fourthChordTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondChordImg" />
+
+    <TextView
+        android:id="@+id/thirdChord"
+        android:layout_width="151dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/libre_baskerville_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/thirdChordTxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstChordImg" />
+
+    <TextView
+        android:id="@+id/secondChord"
+        android:layout_width="151dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/libre_baskerville_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/secondChordTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jamBtn" />
+
+    <ImageView
+        android:id="@+id/fourthChordImg"
+        android:layout_width="151dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fourthChord"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/thirdChordImg"
+        android:layout_width="151dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thirdChord"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/firstChordImg"
+        android:layout_width="151dp"
+        android:layout_height="167dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstChord"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/secondChordImg"
+        android:layout_width="151dp"
+        android:layout_height="167dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:scaleType="centerInside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/secondChord"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/startKeyTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/arimo"
+        android:gravity="center_vertical"
+        android:text="@string/startingKeyText"
+        app:layout_constraintEnd_toStartOf="@+id/keyChoice"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/keyChoice"
+        android:layout_width="134dp"
+        android:layout_height="51dp"
+        android:contentDescription="@string/keyDescription"
+        android:entries="@array/keyOptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/startKeyTextView"
+        app:layout_constraintTop_toTopOf="@+id/startKeyTextView" />
+
+    <Spinner
+        android:id="@+id/styles"
+        android:layout_width="134dp"
+        android:layout_height="49dp"
+        android:contentDescription="@string/styleDescription"
+        android:entries="@array/styleOptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/styleTextView"
+        app:layout_constraintTop_toTopOf="@+id/styleTextView" />
+
+    <TextView
+        android:id="@+id/styleTextView"
+        android:layout_width="82dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/arimo"
+        android:gravity="center_vertical"
+        android:text="@string/styleTextView"
+        app:layout_constraintEnd_toStartOf="@+id/styles"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/startKeyTextView" />
+
+    <TextView
+        android:id="@+id/patternTextView"
+        android:layout_width="87dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/arimo"
+        android:gravity="center_vertical"
+        android:text="@string/patternText"
+        app:layout_constraintEnd_toStartOf="@+id/patterns"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/styleTextView" />
+
+    <Spinner
+        android:id="@+id/patterns"
+        android:layout_width="137dp"
+        android:layout_height="51dp"
+        android:entries="@array/patternOptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/patternTextView"
+        app:layout_constraintTop_toTopOf="@+id/patternTextView" />
+
+    <Button
+        android:id="@+id/jamBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="createJam"
+        android:text="@string/jamBtnTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patternTextView" />
+
+    <TextView
+        android:id="@+id/firstChord"
+        android:layout_width="151dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/libre_baskerville_bold"
+        android:gravity="center_horizontal"
+        android:text="@string/firstChordTxt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jamBtn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
