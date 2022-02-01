@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EB8-rf-XiH">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Numero Uno-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="lab2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="NFT-st-U4N">
+                                <rect key="frame" x="47" y="99" width="320" height="345.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your favorite language and number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bye-et-5of">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDg-PR-ra9">
+                                        <rect key="frame" x="0.0" y="42.5" width="320" height="216"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="ywJ-wd-hFw"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="nID-RB-dof"/>
+                                        </connections>
+                                    </pickerView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make a selection above" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1a9-Up-HOA">
+                                        <rect key="frame" x="0.0" y="280.5" width="320" height="65"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="Hyq-zx-QtO"/>
+                                            <constraint firstAttribute="height" constant="65" id="e2t-9L-JDW"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="NFT-st-U4N" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4YU-iT-maL"/>
+                            <constraint firstItem="NFT-st-U4N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="55" id="6ZG-T4-5lL"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Numero Uno" id="pmB-Px-gc6"/>
+                    <connections>
+                        <outlet property="choiceLabel" destination="1a9-Up-HOA" id="wMI-9P-tRz"/>
+                        <outlet property="numberPicker" destination="YDg-PR-ra9" id="9g1-jK-5Eb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="957.97101449275374" y="76.339285714285708"/>
+        </scene>
+        <!--Numero Dos-->
+        <scene sceneID="jzZ-3Y-AMk">
+            <objects>
+                <viewController id="6SX-H5-sj6" customClass="NumeroDosViewController" customModule="lab2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GIP-Ot-XEO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick a date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agq-GL-awQ">
+                                <rect key="frame" x="165" y="89" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="zDW-t1-d4F">
+                                <rect key="frame" x="47" y="200" width="320" height="216"/>
+                                <connections>
+                                    <action selector="changedDate:" destination="6SX-H5-sj6" eventType="valueChanged" id="Vbb-Kg-NCi"/>
+                                </connections>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make a selection above" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dfG-AG-k6W">
+                                <rect key="frame" x="118" y="467" width="178" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="aXW-rH-RsT"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="dfG-AG-k6W" firstAttribute="top" secondItem="zDW-t1-d4F" secondAttribute="bottom" constant="51" id="GTz-YD-O20"/>
+                            <constraint firstItem="zDW-t1-d4F" firstAttribute="top" secondItem="Agq-GL-awQ" secondAttribute="bottom" constant="90" id="V7f-zG-XcE"/>
+                            <constraint firstItem="Agq-GL-awQ" firstAttribute="centerX" secondItem="GIP-Ot-XEO" secondAttribute="centerX" id="Z27-Hk-Pm3"/>
+                            <constraint firstItem="Agq-GL-awQ" firstAttribute="centerX" secondItem="GIP-Ot-XEO" secondAttribute="centerX" id="b2c-lR-CCb"/>
+                            <constraint firstItem="dfG-AG-k6W" firstAttribute="centerX" secondItem="GIP-Ot-XEO" secondAttribute="centerX" id="bP2-am-tsB"/>
+                            <constraint firstItem="zDW-t1-d4F" firstAttribute="centerX" secondItem="GIP-Ot-XEO" secondAttribute="centerX" id="fdh-VP-TbM"/>
+                            <constraint firstItem="Agq-GL-awQ" firstAttribute="top" secondItem="aXW-rH-RsT" secondAttribute="top" constant="45" id="jcs-bt-VrU"/>
+                            <constraint firstItem="Agq-GL-awQ" firstAttribute="top" secondItem="aXW-rH-RsT" secondAttribute="top" constant="45" id="tuy-fL-UaR"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Numero Dos" id="9nP-nG-eae"/>
+                    <connections>
+                        <outlet property="dateLabel" destination="dfG-AG-k6W" id="kSz-bp-OYY"/>
+                        <outlet property="datePicker" destination="zDW-t1-d4F" id="XCh-mA-oNa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iAz-S6-p4Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47.826086956521742" y="831.69642857142856"/>
+        </scene>
+        <!--Numero Tres-->
+        <scene sceneID="0gS-4p-emo">
+            <objects>
+                <viewController id="IJB-Ra-J0d" customClass="NumeroTresViewController" customModule="lab2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BRJ-Em-xIa">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gGx-bA-ZfL">
+                                <rect key="frame" x="131" y="235" width="152" height="83"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="83" id="CHF-L7-CgB"/>
+                                    <constraint firstAttribute="width" constant="152" id="wF9-ge-n3q"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Click on me!"/>
+                                <connections>
+                                    <action selector="goToMaps:" destination="IJB-Ra-J0d" eventType="touchUpInside" id="kV6-AK-La3"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Click button below to go to google maps (or your default)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yrl-aU-nD2">
+                                <rect key="frame" x="63.5" y="95" width="287" height="155"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="155" id="1ed-gS-YZR"/>
+                                    <constraint firstAttribute="width" constant="287" id="EDF-R0-j5X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ftB-KB-7LS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gGx-bA-ZfL" firstAttribute="top" secondItem="ftB-KB-7LS" secondAttribute="top" constant="191" id="Ies-mX-4pH"/>
+                            <constraint firstItem="Yrl-aU-nD2" firstAttribute="top" secondItem="ftB-KB-7LS" secondAttribute="top" constant="51" id="Jw8-8j-btf"/>
+                            <constraint firstItem="gGx-bA-ZfL" firstAttribute="centerX" secondItem="BRJ-Em-xIa" secondAttribute="centerX" id="uQ1-Ux-kuI"/>
+                            <constraint firstItem="Yrl-aU-nD2" firstAttribute="centerX" secondItem="BRJ-Em-xIa" secondAttribute="centerX" id="vsP-Pf-WiV"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Numero Tres" id="Pft-U3-2PC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wuh-TB-NFX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="979.71014492753636" y="829.6875"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="wcc-cY-mcj">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="EB8-rf-XiH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lds-O7-EIq">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="29P-u2-z9x"/>
+                        <segue destination="6SX-H5-sj6" kind="relationship" relationship="viewControllers" id="0Xh-cW-LAw"/>
+                        <segue destination="IJB-Ra-J0d" kind="relationship" relationship="viewControllers" id="v4U-wI-SSs"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4hW-r2-koj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="47.826086956521742" y="76.339285714285708"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
