@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+<dict>
+	<key>genre</key>
+	<string>action</string>
+	<key>titles</key>
+	<array>
+		<string>Avengers: Endgame</string>
+		<string>Mad Max: Fury Road</string>
+		<string>True Grit</string>
+	</array>
+</dict>
+<dict>
+	<key>genre</key>
+	<string>drama</string>
+	<key>titles</key>
+	<array>
+		<string>The Hurt Locker</string>
+		<string>Creed</string>
+		<string>12 Years a Slave</string>
+	</array>
+</dict>
+<dict>
+	<key>genre</key>
+	<string>horror</string>
+	<key>titles</key>
+	<array>
+		<string>Get Out</string>
+		<string>A Quiet Place</string>
+		<string>Insidious</string>
+	</array>
+</dict>
+<dict>
+	<key>genre</key>
+	<string>science fiction</string>
+	<key>titles</key>
+	<array>
+		<string>Dune</string>
+		<string>Planet of the Apes</string>
+		<string>Total Recall</string>
+	</array>
+</dict>
+<dict>
+	<key>genre</key>
+	<string>comedy</string>
+	<key>titles</key>
+	<array>
+		<string>The Other Guys</string>
+		<string>Coming to America</string>
+		<string>Elf</string>
+	</array>
+</dict>
+
+</array>
+</plist>
