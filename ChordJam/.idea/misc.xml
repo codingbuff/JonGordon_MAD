@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/jonon/AndroidStudioProjects/ChordJam/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22" />
         <entry key="..\:/Users/jonon/AndroidStudioProjects/ChordJam/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/jonon/AndroidStudioProjects/ChordJam/app/src/main/res/layout/activity_saved_progressions.xml" value="0.152" />
+        <entry key="..\:/Users/jonon/AndroidStudioProjects/ChordJam/app/src/main/res/layout/fragment_saved_progressions.xml" value="0.1" />
       </map>
     </option>
   </component>

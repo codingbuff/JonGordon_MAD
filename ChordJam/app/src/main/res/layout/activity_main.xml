@@ -16,33 +16,34 @@
         android:onClick="editProgression"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/a7"
-        tools:srcCompat="@drawable/a7" />
+        app:srcCompat="@drawable/gmaj7"
+        tools:srcCompat="@drawable/gmaj7" />
 
     <ImageView
         android:id="@+id/chord4"
         android:layout_width="157dp"
         android:layout_height="212dp"
-        android:layout_marginTop="98dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="32dp"
         android:contentDescription="TODO"
         android:onClick="editProgression"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord2"
-        app:srcCompat="@drawable/a7"
-        tools:srcCompat="@drawable/a7" />
+        app:srcCompat="@drawable/emin"
+        tools:srcCompat="@drawable/emin" />
 
     <ImageView
         android:id="@+id/chord3"
         android:layout_width="157dp"
         android:layout_height="212dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="98dp"
+        android:layout_marginTop="56dp"
+        android:contentDescription="@string/app_name"
         android:onClick="editProgression"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord1"
-        app:srcCompat="@drawable/a7"
-        tools:srcCompat="@drawable/a7" />
+        app:srcCompat="@drawable/amin"
+        tools:srcCompat="@drawable/amin" />
 
     <ImageView
         android:id="@+id/chord2"
@@ -50,10 +51,31 @@
         android:layout_height="212dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="33dp"
+        android:contentDescription="@string/app_name"
         android:onClick="editProgression"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/a7"
-        tools:srcCompat="@drawable/a7" />
+        app:srcCompat="@drawable/cmaj"
+        tools:srcCompat="@drawable/cmaj" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="48dp"
+        android:text="Save"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chord3" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="49dp"
+        android:layout_marginEnd="60dp"
+        android:text="Upload"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chord4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@ import android.widget.ImageView
 
 class MainActivity : AppCompatActivity() {
 
-    init var chordImg: ImageView //placeholder chord image/
+    lateinit var chordImg: ImageView //placeholder chord image/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +26,9 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
+    //edit progression will open dialog (modal) box which will prompt user
+    //to edit current chord selected from image if not the outline 'plus'
+    //placeholder chord. If it is, then we'll call create chord
     fun editProgression(view: View) {
         //TODO: instantiate dialog box from: https://developer.android.com/guide/topics/ui/dialogs
         // two spinners: 1) key spinner 2) chord style spinners
@@ -36,8 +38,14 @@ class MainActivity : AppCompatActivity() {
         //TODO: style = selected spinner option
         //TODO: add button exits dialog box and calls function add new chord
         //TODO: exit button closes dialog box and does no action
-        addChord(key, style);
+        //if View.image is placeholder chord:
+        //addChord(key, style);
+        //else:
+        //View.image = ImageView(key + style)
     }
+
+    //add chord will be called when user selects placeholder image at end of progression
+    //new chord with the passed in key and style will
     fun addChord(key: String, style: String){
         //TODO: create new ImageView using syntax: https://stackoverflow.com/questions/41802004/add-imageviews-dynamically-on-android
         //ImageView newChord = new ImageView(AddImageView.this);
