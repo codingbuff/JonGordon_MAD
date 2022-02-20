@@ -11,7 +11,6 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
@@ -41,7 +40,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.save -> {
-                Toast.makeText(this,"you clicked Save",Toast.LENGTH_LONG).show()
+                openSaveDialog()
                 return true
             }
             R.id.load -> {
@@ -50,6 +49,38 @@ class MainActivity : AppCompatActivity() {
             } else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun saveProgression(chordProgression: MutableList<ImageView>):Boolean {
+        //TODO: implement saveProgression
+        //stores currently displayed chord progression for later use
+        //will require an edit text view and transferring of data
+        return true
+    }
+
+    private fun openSaveDialog() {
+        val saveBuilder = AlertDialog.Builder(this@MainActivity)
+        saveBuilder.apply {
+            setPositiveButton(R.string.save) {
+                    _, _ ->
+                var progressionSaved = saveProgression(chordProgression)
+                val snackbar =
+                    Snackbar.make(getWindow().getDecorView().getRootView(),
+                        if (progressionSaved) R.string.saveSuccess else R.string.saveFail,
+                        Snackbar.LENGTH_LONG
+                    )
+                snackbar.show()
+            }
+            setNegativeButton(R.string.cancel,
+                DialogInterface.OnClickListener { dialog, id ->
+                    // User cancelled the dialog
+                })
+        }
+        saveBuilder.setMessage(R.string.saveDialogMsg)
+            .setTitle(R.string.saveDialogTitle)
+        val saveDialog = saveBuilder.create()
+        saveDialog.show()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +104,6 @@ class MainActivity : AppCompatActivity() {
             else{
                 openAddDialog(nextChordImg)
             }
-
         }
     }
 
