@@ -13,7 +13,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="100dp"
         android:contentDescription="@string/chordImage"
-        android:onClick="editProgression"
+        android:onClick="editChord"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,6 @@
         android:layout_marginTop="56dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="TODO"
-        android:onClick="editProgression"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord2" />
 
@@ -35,7 +34,6 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="56dp"
         android:contentDescription="@string/app_name"
-        android:onClick="editProgression"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chord1" />
 
@@ -46,7 +44,6 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="33dp"
         android:contentDescription="@string/app_name"
-        android:onClick="editProgression"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

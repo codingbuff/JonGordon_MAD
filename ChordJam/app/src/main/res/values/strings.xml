@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">ChordJam</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fabDescription">add chord</string>
     <string name="chordImageDescription">chord image</string>
     <string name="addChordInstructionText">Click the plus icon to add a new chord</string>
     <string name="chordImage">chord image</string>
     <string name="add">Add</string>
+    <string name="apply">Apply</string>
     <string name="cancel">Cancel</string>
     <string name="addChordDialogTitle">Add new chord</string>
+    <string name="editChordDialogTitle">Edit chord</string>
     <string name="addChordDialogMsg">Select from the options below</string>
     <string-array name="keys">
         <item>"A"</item>
