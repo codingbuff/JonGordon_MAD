@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Spinner
+        android:id="@+id/addKeySpinner"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:contentDescription="select new chord key"
+        android:entries="@array/keys"
+        app:layout_constraintEnd_toStartOf="@+id/addTypeTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/addKeyTextView"
+        app:layout_constraintTop_toTopOf="@+id/addKeyTextView" />
+
+    <TextView
+        android:id="@+id/addKeyTextView"
+        android:layout_width="81dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="key"
+        app:layout_constraintEnd_toStartOf="@+id/addKeySpinner"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/addTypeTextView"
+        android:layout_width="66dp"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="type"
+        app:layout_constraintEnd_toStartOf="@+id/addTypeSpinner"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/addKeySpinner"
+        app:layout_constraintTop_toTopOf="@+id/addKeySpinner" />
+
+    <Spinner
+        android:id="@+id/addTypeSpinner"
+        android:layout_width="118dp"
+        android:layout_height="48dp"
+        android:contentDescription="select new chord type"
+        android:entries="@array/types"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/addTypeTextView"
+        app:layout_constraintTop_toTopOf="@+id/addTypeTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

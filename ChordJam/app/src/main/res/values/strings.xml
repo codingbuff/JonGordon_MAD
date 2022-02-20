@@ -2,4 +2,33 @@
     <string name="app_name">ChordJam</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fabDescription">add chord</string>
+    <string name="chordImageDescription">chord image</string>
+    <string name="addChordInstructionText">Click the plus icon to add a new chord</string>
+    <string name="chordImage">chord image</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="addChordDialogTitle">Add new chord</string>
+    <string name="addChordDialogMsg">Select from the options below</string>
+    <string-array name="keys">
+        <item>"A"</item>
+        <item>"A#/Bb"</item>
+        <item>"B"</item>
+        <item>"C"</item>
+        <item>"C#/Db"</item>
+        <item>"D"</item>
+        <item>"D#/Eb"</item>
+        <item>"E"</item>
+        <item>"F"</item>
+        <item>"F#/Gb"</item>
+        <item>"G"</item>
+        <item>"G#/Ab"</item>
+    </string-array>
+    <string-array name="types">
+        <item>"maj"</item>
+        <item>"min"</item>
+        <item>"maj7"</item>
+        <item>"7"</item>
+        <item>"min7"</item>
+    </string-array>
 </resources>
