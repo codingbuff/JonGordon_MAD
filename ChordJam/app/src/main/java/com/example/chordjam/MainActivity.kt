@@ -3,11 +3,15 @@ package com.example.chordjam
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
@@ -28,6 +32,24 @@ class MainActivity : AppCompatActivity() {
     val CAPACITY = 4
     lateinit var chordProgression: MutableList<ImageView>
     var nextChordIdx by Delegates.notNull<Int>()
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu,menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.save -> {
+                Toast.makeText(this,"you clicked Save",Toast.LENGTH_LONG).show()
+                return true
+            }
+            R.id.load -> {
+                Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
+                return true
+            } else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
