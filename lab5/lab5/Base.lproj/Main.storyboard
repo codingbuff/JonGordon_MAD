@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="lab5" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zen-img" translatesAutoresizingMaskIntoConstraints="NO" id="0yC-9y-Y4Z">
+                                <rect key="frame" x="132" y="63" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="eRD-Tm-Kgr"/>
+                                    <constraint firstAttribute="height" constant="150" id="o9K-z9-8JN"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Quote text here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4bn-a9-Fdo">
+                                <rect key="frame" x="88.5" y="221" width="237" height="70"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="Mbd-6q-Nvj"/>
+                                    <constraint firstAttribute="width" constant="237" id="Yfm-lH-xAo"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="author here" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="U6w-uk-OMJ">
+                                <rect key="frame" x="92.5" y="299" width="229" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="FHb-hL-Ji8"/>
+                                    <constraint firstAttribute="width" constant="229" id="cog-85-i8w"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBt-vC-Rf8">
+                                <rect key="frame" x="105" y="357" width="204" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="8p3-mE-d2g"/>
+                                    <constraint firstAttribute="width" constant="204" id="LX9-Fs-Gqs"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Generate"/>
+                                <connections>
+                                    <action selector="generateNewQuote:" destination="BYZ-38-t0r" eventType="touchUpInside" id="77p-jd-oiD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KBt-vC-Rf8" firstAttribute="top" secondItem="U6w-uk-OMJ" secondAttribute="bottom" constant="8" symbolic="YES" id="1t5-ZZ-Ji2"/>
+                            <constraint firstItem="KBt-vC-Rf8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9Gn-Nc-nUj"/>
+                            <constraint firstItem="U6w-uk-OMJ" firstAttribute="top" secondItem="4bn-a9-Fdo" secondAttribute="bottom" constant="8" symbolic="YES" id="Cza-5J-E7p"/>
+                            <constraint firstItem="0yC-9y-Y4Z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="GfS-lX-oBK"/>
+                            <constraint firstItem="0yC-9y-Y4Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JeF-hx-V4N"/>
+                            <constraint firstItem="4bn-a9-Fdo" firstAttribute="top" secondItem="0yC-9y-Y4Z" secondAttribute="bottom" constant="8" symbolic="YES" id="QGq-Bd-dpm"/>
+                            <constraint firstItem="U6w-uk-OMJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WIj-Cg-1fY"/>
+                            <constraint firstItem="4bn-a9-Fdo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cPg-hW-2l5"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="authorTextView" destination="U6w-uk-OMJ" id="dhg-tz-lUR"/>
+                        <outlet property="quoteTextView" destination="4bn-a9-Fdo" id="5uP-HC-fdS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-17.39130434782609" y="82.366071428571431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="zen-img" width="512" height="512"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
