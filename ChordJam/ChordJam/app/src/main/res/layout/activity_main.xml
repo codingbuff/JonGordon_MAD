@@ -46,17 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addChordFab"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="44dp"
-        android:clickable="true"
-        android:contentDescription="add chord"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
 
     <TextView
         android:id="@+id/instructionTextView"
@@ -68,18 +57,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
-
+        tools:context=".MainActivity">
         <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/bottomAppBar"    >
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottomNavigationView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="16dp"
+                app:menu="@menu/bottom_actions" />
         </com.google.android.material.bottomappbar.BottomAppBar>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!-- Floating Action button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addChordFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+        app:layout_anchor="@id/bottomAppBar"
+        android:contentDescription="@string/addChord"
+        />
 
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/loadProg"
+        android:title="Load"
+        android:icon="@drawable/ic_folder" />
+    <item android:id="@+id/saveProg"
+        android:title="Save"
+        android:icon="@drawable/ic_save" />
+</menu>
