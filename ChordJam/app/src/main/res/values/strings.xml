@@ -15,6 +15,7 @@
     <string name="addChordDialogMsg">Select from the options below</string>
     <string name="saveSuccess">Successfully saved</string>
     <string name="saveFail">Progression failed to save</string>
+    <string name="addChordString">add chord</string>
     <string-array name="keys">
         <item>"A"</item>
         <item>"A#/Bb"</item>
