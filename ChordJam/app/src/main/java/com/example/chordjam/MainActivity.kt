@@ -3,6 +3,7 @@ package com.example.chordjam
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,10 +13,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.bottomappbar.BottomAppBar
 import kotlin.properties.Delegates
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var bottomAppBar: BottomAppBar
     lateinit var topText: TextView
     lateinit var nextChordImg: ImageView
     lateinit var chord1Img: ImageView
@@ -32,23 +35,25 @@ class MainActivity : AppCompatActivity() {
     lateinit var chordProgression: MutableList<ImageView>
     var nextChordIdx by Delegates.notNull<Int>()
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu,menu)
-        return true
-    }
+//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+//        menuInflater.inflate(R.menu.menu,menu)
+//        return true
+//    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.save -> {
-                openSaveDialog()
-                return true
-            }
-            R.id.load -> {
-                Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
-                return true
-            } else -> super.onOptionsItemSelected(item)
-        }
-    }
+
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        return when(item.itemId){
+//            R.id.save -> {
+//                openSaveDialog()
+//                return true
+//            }
+//            R.id.load -> {
+//                Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
+//                return true
+//            } else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 
     private fun saveProgression(chordProgression: MutableList<ImageView>):Boolean {
         //TODO: implement saveProgression
@@ -85,6 +90,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        bottomAppBar = findViewById(R.id.bottom_app_bar)
         topText = findViewById<TextView>(R.id.instructionTextView)
         chord1Img = findViewById<ImageView>(R.id.chord1)
         chord2Img = findViewById<ImageView>(R.id.chord2)
@@ -103,6 +109,22 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 openAddDialog(nextChordImg)
+            }
+        }
+
+        bottomAppBar.setOnMenuItemClickListener{ menuItem ->
+            when (menuItem.itemId) {
+                R.id.app_bar_folder -> {
+                    Log.d("bottomAppListener","Load was clicked")
+                    Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
+                    true
+                }
+                R.id.app_bar_save -> {
+                    Log.d("bottomAppListener","Save was clicked")
+                    openSaveDialog()
+                    true
+                }
+                else -> false
             }
         }
     }
