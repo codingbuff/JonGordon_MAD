@@ -11,7 +11,7 @@
     <item
         android:title="Load"
         android:id="@+id/app_bar_folder"
-        android:icon="@drawable/ic_folder"
+        android:icon="@drawable/ic_baseline_folder"
         app:showAsAction="always"
         />
 </menu>

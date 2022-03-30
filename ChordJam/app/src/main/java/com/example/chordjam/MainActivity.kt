@@ -35,26 +35,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var chordProgression: MutableList<ImageView>
     var nextChordIdx by Delegates.notNull<Int>()
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu,menu)
-//        return true
-//    }
-
-
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return when(item.itemId){
-//            R.id.save -> {
-//                openSaveDialog()
-//                return true
-//            }
-//            R.id.load -> {
-//                Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
-//                return true
-//            } else -> super.onOptionsItemSelected(item)
-//        }
-//    }
-
     private fun saveProgression(chordProgression: MutableList<ImageView>):Boolean {
         //TODO: implement saveProgression
         //stores currently displayed chord progression for later use
@@ -115,12 +95,10 @@ class MainActivity : AppCompatActivity() {
         bottomAppBar.setOnMenuItemClickListener{ menuItem ->
             when (menuItem.itemId) {
                 R.id.app_bar_folder -> {
-                    Log.d("bottomAppListener","Load was clicked")
                     Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
                     true
                 }
                 R.id.app_bar_save -> {
-                    Log.d("bottomAppListener","Save was clicked")
                     openSaveDialog()
                     true
                 }

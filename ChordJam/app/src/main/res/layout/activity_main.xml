@@ -86,7 +86,6 @@
             android:backgroundTint="@color/design_default_color_primary"
             app:fabCradleMargin="0dp"
             app:fabCradleRoundedCornerRadius="0dp"
-            app:fabAlignmentMode="end"
             app:menu="@menu/bottom_app_bar_menu"
             />
 
