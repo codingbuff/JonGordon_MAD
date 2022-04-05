@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">lab7</string>
+    <string name="cats">Cats</string>
+    <string name="cat_img">Cat picture</string>
+</resources>
