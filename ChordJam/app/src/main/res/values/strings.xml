@@ -5,7 +5,8 @@
     <string name="addChordInstructionText">Click the plus icon to add a new chord</string>
     <string name="chordImage">chord image</string>
     <string name="add">Add</string>
-    <string name="apply">Apply</string>
+    <string name="apply">Apply change</string>
+    <string name="removeChord">Remove chord</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="saveDialogTitle">Save Progression</string>

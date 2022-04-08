@@ -119,7 +119,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun createNewChordImage(){
-
         newChord = getImageString(addChordKey,addChordType)
 
         val resId = resources.getIdentifier(newChord, "drawable", packageName)
@@ -156,7 +155,12 @@ class MainActivity : AppCompatActivity() {
                 editChordType = editTypeSpinner.selectedItem.toString()
                 editChordImage(editImg)
             }
-            setNegativeButton(R.string.cancel,
+
+            setNegativeButton(R.string.removeChord){
+                _, _->
+                removeChordFromProgression(editImg)
+            }
+            setNeutralButton(R.string.cancel,
                 DialogInterface.OnClickListener { dialog, id ->
                     // User cancelled the dialog
                 })
@@ -166,6 +170,26 @@ class MainActivity : AppCompatActivity() {
 
         val editChordDialog = editChordBuilder.create()
         editChordDialog.show()
+    }
+
+    fun removeChordFromProgression(removeChord: ImageView){
+        val removeChordIndex = chordProgression.indexOf(removeChord)
+        val lastChordPosition = nextChordIdx //can't use nextChordIx to compare so doing this
+        if (lastChordPosition < 2) {
+            chordProgression[0].setImageDrawable(null)
+            topText.visibility = View.VISIBLE
+        }
+        else {
+            for (i in removeChordIndex until nextChordIdx - 1) {
+                Log.d("iterator val", i.toString())
+                chordProgression[i].setImageDrawable(chordProgression[i + 1].drawable)
+            }
+        }
+
+        nextChordIdx -= 1
+        chordProgression[nextChordIdx].setImageDrawable(null)
+        nextChordImg = chordProgression[nextChordIdx]
+
     }
 
     fun openAddDialog(nextChord: ImageView){
