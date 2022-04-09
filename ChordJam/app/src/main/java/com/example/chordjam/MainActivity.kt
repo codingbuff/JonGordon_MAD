@@ -1,21 +1,46 @@
 package com.example.chordjam
 
 import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipDescription
 import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
+import android.view.DragEvent
 import android.view.View
+import android.view.View.DragShadowBuilder
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
+//
+//class DropListener(private val onDrop: () -> Unit) : View.OnDragListener {
+//    override fun onDrag(view: View, dragEvent: DragEvent): Boolean {
+//        when (dragEvent.action) {
+//
+//            DragEvent.ACTION_DRAG_ENTERED -> {
+//                val snackbar =
+//                    Snackbar.make(view, "IMAGE ENTERED DROP AREA", Snackbar.LENGTH_LONG)
+//                snackbar.show()
+//            }
+//            DragEvent.ACTION_DRAG_ENDED -> {
+//                val snackbar =
+//                    Snackbar.make(view, "ACTION DRAG HAS ENDED", Snackbar.LENGTH_LONG)
+//                snackbar.show()
+//            }
+//            // when item has been dropped, notify about it
+//            DragEvent.ACTION_DROP -> onDrop()
+//        }
+//
+//        return true
+//    }
+//}
 class MainActivity : AppCompatActivity() {
 
     lateinit var bottomAppBar: BottomAppBar
@@ -67,6 +92,45 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    private fun setClickListener(img: ImageView){
+        //taken from https://proandroiddev.com/drag-and-drop-in-android-all-you-need-to-know-6df8babfb507
+        img.setOnLongClickListener{ view ->
+            val textDesc = "Chord Image"
+            val data = ClipData.newPlainText("", textDesc) //adjust data
+            val shadowBuilder = View.DragShadowBuilder(view)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                view.startDragAndDrop(data, shadowBuilder, view, 0)
+            } else {
+                view.startDrag(data, shadowBuilder, view, 0)
+            }
+            true
+        }
+    }
+
+    private fun setDragListener(img: ImageView){
+        //from docs: https://developer.android.com/guide/topics/ui/drag-drop#StartDrag
+        img.setOnDragListener { v, e ->
+            when (e.action) {
+                DragEvent.ACTION_DRAG_ENTERED -> {
+                    // Applies a green tint to the View.
+                    (v as? ImageView)?.setColorFilter(Color.GREEN)
+
+                    // Invalidates the view to force a redraw in the new tint.
+                    v.invalidate()
+
+                    // Returns true; the value is ignored.
+                    true
+                }
+                else -> {
+                    // An unknown action type was received.
+                    Log.e("DragDrop Example", "Unknown action type received by View.OnDragListener.")
+                    false
+                }
+            }
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -78,6 +142,13 @@ class MainActivity : AppCompatActivity() {
         chord4Img = findViewById<ImageView>(R.id.chord4)
         nextChordIdx = 0
         chordProgression = listOf(chord1Img,chord2Img,chord3Img,chord4Img).toMutableList()
+
+
+        for (img in chordProgression){
+            setClickListener(img)
+            setDragListener(img)
+        }
+
         newChord = ""
         nextChordImg = chordProgression[nextChordIdx]
         val fab: View = findViewById(R.id.addChordFab)
