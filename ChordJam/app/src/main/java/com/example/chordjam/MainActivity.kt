@@ -323,7 +323,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun removeChordFromProgression(removeChord: ImageView){
-        removeChord.setOnClickListener(null)
         val removeChordIndex = chordProgression.indexOf(removeChord)
         val lastChordPosition = nextChordIdx //can't use nextChordIx to compare so doing this
 
@@ -337,7 +336,6 @@ class MainActivity : AppCompatActivity() {
         else {
             for (i in removeChordIndex until nextChordIdx - 1) {
                 chordProgression[i].setImageDrawable(chordProgression[i + 1].drawable)
-                chordProgression[i + 1].setOnClickListener(null)
             }
         }
         //set last image to blank and update nextChordIdx so it points to where the next
