@@ -20,28 +20,6 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
-//
-//class DropListener(private val onDrop: () -> Unit) : View.OnDragListener {
-//    override fun onDrag(view: View, dragEvent: DragEvent): Boolean {
-//        when (dragEvent.action) {
-//
-//            DragEvent.ACTION_DRAG_ENTERED -> {
-//                val snackbar =
-//                    Snackbar.make(view, "IMAGE ENTERED DROP AREA", Snackbar.LENGTH_LONG)
-//                snackbar.show()
-//            }
-//            DragEvent.ACTION_DRAG_ENDED -> {
-//                val snackbar =
-//                    Snackbar.make(view, "ACTION DRAG HAS ENDED", Snackbar.LENGTH_LONG)
-//                snackbar.show()
-//            }
-//            // when item has been dropped, notify about it
-//            DragEvent.ACTION_DROP -> onDrop()
-//        }
-//
-//        return true
-//    }
-//}
 class MainActivity : AppCompatActivity() {
 
     lateinit var bottomAppBar: BottomAppBar
@@ -350,6 +328,8 @@ class MainActivity : AppCompatActivity() {
         chordProgression[nextChordIdx].setImageDrawable(null)
         chordNames[nextChordIdx] = ""
         chordProgression[nextChordIdx].setOnClickListener(null)
+        chordProgression[nextChordIdx].setOnDragListener(null)
+        chordProgression[nextChordIdx].setOnLongClickListener(null)
         nextChordImg = chordProgression[nextChordIdx]
     }
 
