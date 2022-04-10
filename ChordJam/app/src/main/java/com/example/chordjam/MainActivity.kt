@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var editChord: String
     val CAPACITY = 4
     lateinit var chordProgression: MutableList<ImageView>
+    lateinit var chordNames: MutableList<String>
     var nextChordIdx by Delegates.notNull<Int>()
 
     private fun saveProgression(chordProgression: MutableList<ImageView>):Boolean {
@@ -225,7 +226,7 @@ class MainActivity : AppCompatActivity() {
         chord4Img = findViewById<ImageView>(R.id.chord4)
         nextChordIdx = 0
         chordProgression = listOf(chord1Img,chord2Img,chord3Img,chord4Img).toMutableList()
-
+        chordNames = listOf("","","","").toMutableList()
         newChord = ""
         nextChordImg = chordProgression[nextChordIdx]
         val fab: View = findViewById(R.id.addChordFab)
@@ -275,10 +276,11 @@ class MainActivity : AppCompatActivity() {
         nextChordImg.setOnClickListener{openEditDialog(newImg) }
         setClickListener(nextChordImg,newChord)
         setDragListener(nextChordImg)
+
         if (nextChordIdx == 0){
             topText.visibility = View.INVISIBLE
         }
-
+        chordNames[nextChordIdx] = newChord
         nextChordIdx += 1
         if(nextChordIdx < CAPACITY){
             nextChordImg = chordProgression[nextChordIdx]
@@ -289,6 +291,8 @@ class MainActivity : AppCompatActivity() {
         editChord = getImageString(editChordKey,editChordType)
         val resId = resources.getIdentifier(editChord, "drawable", packageName)
         editImg.setImageResource(resId)
+        var indexInProgression = chordProgression.indexOf(editImg)
+        chordNames[indexInProgression] = editChord
         setClickListener(editImg, editChord)
     }
 
@@ -330,21 +334,23 @@ class MainActivity : AppCompatActivity() {
         //instructional text
         if (lastChordPosition < 2) {
             chordProgression[0].setImageDrawable(null)
+            chordNames[0] = ""
             topText.visibility = View.VISIBLE
         }
         //fill in spots where chord got removed by setting each image to the one in front of it
         else {
             for (i in removeChordIndex until nextChordIdx - 1) {
                 chordProgression[i].setImageDrawable(chordProgression[i + 1].drawable)
+                chordNames[i] = chordNames[i+1]
             }
         }
         //set last image to blank and update nextChordIdx so it points to where the next
         //chord should go
         nextChordIdx -= 1
         chordProgression[nextChordIdx].setImageDrawable(null)
+        chordNames[nextChordIdx] = ""
         chordProgression[nextChordIdx].setOnClickListener(null)
         nextChordImg = chordProgression[nextChordIdx]
-
     }
 
     fun openAddDialog(nextChord: ImageView){
