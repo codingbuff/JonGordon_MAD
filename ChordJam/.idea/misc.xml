@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jon/Documents/Git/JonGordon_MAD/ChordJam/app/src/main/res/drawable/left_border.xml" value="0.2015" />
+        <entry key="..\:/Users/Jon/Documents/Git/JonGordon_MAD/ChordJam/app/src/main/res/layout/activity_main.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/Jon/Documents/Git/JonGordon_MAD/ChordJam/app/src/main/res/layout/activity_saved_progressions.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/Jon/Documents/Git/JonGordon_MAD/ChordJam/app/src/main/res/layout/left_border_highlight.xml" value="0.2520833333333333" />
         <entry key="..\:/Users/Jon/Documents/Git/JonGordon_MAD/ChordJam/app/src/main/res/layout/select_chord_dialog.xml" value="0.1037037037037037" />
         <entry key="..\:/Users/jonon/AndroidStudioProjects/ChordJam/app/src/main/res/drawable/add_chord_background.xml" value="0.1" />
         <entry key="..\:/Users/jonon/AndroidStudioProjects/ChordJam/app/src/main/res/drawable/ic_launcher_background.xml" value="0.22" />

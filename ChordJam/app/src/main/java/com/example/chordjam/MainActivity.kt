@@ -10,14 +10,12 @@ import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.view.View.*
-import android.widget.ImageView
-import android.widget.Spinner
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,12 +32,13 @@ class MainActivity : AppCompatActivity() {
     lateinit var editChordType: String
     lateinit var newChord: String
     lateinit var editChord: String
+    lateinit var draggedView: ImageView
     val CAPACITY = 4
     lateinit var chordProgression: MutableList<ImageView>
     lateinit var chordNames: MutableList<String>
     var nextChordIdx by Delegates.notNull<Int>()
 
-    private fun saveProgression(chordProgression: MutableList<ImageView>):Boolean {
+    private fun saveProgression(chordProgression: MutableList<ImageView>): Boolean {
         //TODO: implement saveProgression
         //stores currently displayed chord progression for later use
         //will require an edit text view and transferring of data
@@ -49,11 +48,11 @@ class MainActivity : AppCompatActivity() {
     private fun openSaveDialog() {
         val saveBuilder = AlertDialog.Builder(this@MainActivity)
         saveBuilder.apply {
-            setPositiveButton(R.string.save) {
-                    _, _ ->
+            setPositiveButton(R.string.save) { _, _ ->
                 var progressionSaved = saveProgression(chordProgression)
                 val snackbar =
-                    Snackbar.make(getWindow().getDecorView().getRootView(),
+                    Snackbar.make(
+                        getWindow().getDecorView().getRootView(),
                         if (progressionSaved) R.string.saveSuccess else R.string.saveFail,
                         Snackbar.LENGTH_LONG
                     )
@@ -70,32 +69,34 @@ class MainActivity : AppCompatActivity() {
         saveDialog.show()
     }
 
-
-    private fun setClickListener(img: ImageView, imgString: String, idxOfChord: Int){
+    private fun setClickListener(img: ImageView, imgString: String, idxOfChord: Int) {
         //taken from https://proandroiddev.com/drag-and-drop-in-android-all-you-need-to-know-6df8babfb507
-        img.setOnLongClickListener{ view ->
-            val data = ClipData.newPlainText(idxOfChord.toString(), imgString) //imgString is name of image of the imageView
+        img.setOnLongClickListener { view ->
+            val data = ClipData.newPlainText(
+                idxOfChord.toString(),
+                imgString
+            ) //imgString is name of image of the imageView
             val indexData = ClipData.Item(idxOfChord.toString())
             data.addItem(indexData)
             val shadowBuilder = View.DragShadowBuilder(view)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                view.startDragAndDrop(data, shadowBuilder, view, 0)
                 view.visibility = INVISIBLE
+                view.startDragAndDrop(data, shadowBuilder, view, 0)
             }
+
             true
         }
     }
 
-    private fun setDragListener(img: ImageView, imgIndex: Int){
+    private fun setDragListener(img: ImageView, imgIndex: Int) {
         //taken from example in docs: https://developer.android.com/guide/topics/ui/drag-drop#StartDrag
-        img.setOnDragListener{v, e ->
+        img.setOnDragListener { v, e ->
+
+            // Handles each of the expected events.
             when (e.action) {
                 DragEvent.ACTION_DRAG_STARTED -> {
                     // Determines if this View can accept the dragged data.
                     if (e.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
-
-                        // As an example of what your application might do, applies a blue color tint
-                        // to the View to indicate that it can accept data.
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate()
                         // Returns true to indicate that the View can accept the dragged data.
@@ -107,83 +108,37 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 DragEvent.ACTION_DRAG_ENTERED -> {
-
-                    //(v as? ImageView)?.setColorFilter(Color.GREEN)
-                   //val item: ClipData.Item = e.clipData.getItemAt(0)
-                    // Invalidates the view to force a redraw in the new tint.
-                    //v.invalidate()
-                    // Returns true; the value is ignored.
+                    v.setBackgroundResource(R.drawable.left_border)
                     true
                 }
-
                 DragEvent.ACTION_DRAG_LOCATION -> {
                     // Ignore the event.
                     true
                 }
                 DragEvent.ACTION_DRAG_EXITED -> {
-                    // Resets the color tint to blue.
-                    //(v as? ImageView)?.setColorFilter(Color.BLUE)
-                    //val item: ClipData.Item = e.clipData.getItemAt(0)
-                    // Gets the text data from the item.
-                   // val dragData = item.text
-                    // Invalidates the view to force a redraw in the new tint.
-                    v.invalidate()
-                    // Returns true; the value is ignored.
+                    v.setBackgroundResource(0)
                     true
                 }
                 DragEvent.ACTION_DROP -> {
                     // Gets the item containing the dragged data.
+                    v.setBackgroundResource(0)
                     val item: ClipData.Item = e.clipData.getItemAt(0)
                     val indexItem: ClipData.Item = e.clipData.getItemAt(1)
                     // Gets the text data from the item.
                     val dragData = item.text
                     val idxData = indexItem.text
                     val view = e.getLocalState() as View
-                    if (e.getLocalState() != null) {
-                        view.visibility = VISIBLE
-                    }
-                    // Displays a message containing the dragged data.
-                  // Toast.makeText(this, "Dragged data is $dragData", Toast.LENGTH_LONG).show()
-                    // Turns off any color tints.
-                   // (v as? ImageView)?.clearColorFilter()
-                    // Invalidates the view to force a redraw.
-                    v.invalidate()
-                    Log.i("ACTION_DROP","dragData: $dragData")
-                    Log.i("ACTION_DROP", "idxData: $idxData")
-                    if(e.localState == null){
-                        Log.d("localState check", "is null")
-                    }
-                    else{
-                        Log.d("localState check","not null")
-                    }
-                    //v.visibility = VISIBLE
+                    view.setVisibility(View.VISIBLE)
                     // Returns true. DragEvent.getResult() will return true.
                     true
                 }
-
                 DragEvent.ACTION_DRAG_ENDED -> {
-                    //val item: ClipData.Item = e.clipData.getItemAt(0)
-                    // Gets the text data from the item.
-                   // val dragData = item.text
-                    // Turns off any color tinting.
-                    //(v as? ImageView)?.clearColorFilter()
-
-                    // Invalidates the view to force a redraw.
-                    //v.invalidate()
-
-                    // Does a getResult(), and displays what happened.
-//                    when (e.result) {
-//                        true ->
-//                            Toast.makeText(this, "The drop was handled.", Toast.LENGTH_LONG)
-//                        else ->
-//                            Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_LONG)
-//                    }.show()
-//                    v.visibility = View.VISIBLE
-                   // Log.i("dragData:","$dragData")
-                    // Returns true; the value is ignored.
-                    val view = e.getLocalState() as View
-                    if (e.getLocalState() != null) {
-                        view.visibility = VISIBLE
+                    //below conditional taken from https://stackoverflow.com/questions/10988671/java-util-concurrentmodificationexception-in-view-setvisibility
+                    //solves the java.util.ConcurrentModificationException problem
+                    //not sure how, but it does
+                    if (e.getAction() === DragEvent.ACTION_DRAG_ENDED) {
+                        val droppedView = e.getLocalState() as View
+                        droppedView.post { droppedView.visibility = VISIBLE }
                     }
                     true
                 }
@@ -199,10 +154,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        draggedView = findViewById(R.id.chord1)
         bottomAppBar = findViewById(R.id.bottom_app_bar)
         topText = findViewById<TextView>(R.id.instructionTextView)
         chord1Img = findViewById<ImageView>(R.id.chord1)
