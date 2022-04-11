@@ -4,13 +4,12 @@ import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.DialogInterface
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.DragEvent
 import android.view.View
-import android.view.View.DragShadowBuilder
+import android.view.View.*
 import android.widget.ImageView
 import android.widget.Spinner
 import android.widget.TextView
@@ -72,35 +71,33 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun setClickListener(img: ImageView, imgString: String){
+    private fun setClickListener(img: ImageView, imgString: String, idxOfChord: Int){
         //taken from https://proandroiddev.com/drag-and-drop-in-android-all-you-need-to-know-6df8babfb507
         img.setOnLongClickListener{ view ->
-            val data = ClipData.newPlainText("", imgString) //imgString is name of image of the imageView
+            val data = ClipData.newPlainText(idxOfChord.toString(), imgString) //imgString is name of image of the imageView
+            val indexData = ClipData.Item(idxOfChord.toString())
+            data.addItem(indexData)
             val shadowBuilder = View.DragShadowBuilder(view)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                view.startDragAndDrop(data, shadowBuilder, null, 0)
+                view.startDragAndDrop(data, shadowBuilder, view, 0)
+                view.visibility = INVISIBLE
             }
             true
         }
     }
 
-    private fun setDragListener(img: ImageView){
+    private fun setDragListener(img: ImageView, imgIndex: Int){
         //taken from example in docs: https://developer.android.com/guide/topics/ui/drag-drop#StartDrag
         img.setOnDragListener{v, e ->
-
             when (e.action) {
-
                 DragEvent.ACTION_DRAG_STARTED -> {
                     // Determines if this View can accept the dragged data.
                     if (e.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)) {
+
                         // As an example of what your application might do, applies a blue color tint
                         // to the View to indicate that it can accept data.
-                        //(v as? ImageView)?.setColorFilter(Color.BLUE)
-
                         // Invalidate the view to force a redraw in the new tint.
                         v.invalidate()
-                        Log.i("ACTION_DRAG_STARTED", "drag started fired")
-
                         // Returns true to indicate that the View can accept the dragged data.
                         true
                     } else {
@@ -110,20 +107,17 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 DragEvent.ACTION_DRAG_ENTERED -> {
-                    // Applies a green tint to the View.
+
                     //(v as? ImageView)?.setColorFilter(Color.GREEN)
                    //val item: ClipData.Item = e.clipData.getItemAt(0)
                     // Invalidates the view to force a redraw in the new tint.
                     //v.invalidate()
                     // Returns true; the value is ignored.
-                    Log.i("ACTION_DRAG_ENTERED", "drag entered fired")
                     true
                 }
 
                 DragEvent.ACTION_DRAG_LOCATION -> {
-            // Ignore the event.
-                    Log.i("ACTION_DRAG_LOCATION", "drag location fired")
-                    //v.visibility = View.INVISIBLE
+                    // Ignore the event.
                     true
                 }
                 DragEvent.ACTION_DRAG_EXITED -> {
@@ -134,31 +128,41 @@ class MainActivity : AppCompatActivity() {
                    // val dragData = item.text
                     // Invalidates the view to force a redraw in the new tint.
                     v.invalidate()
-
                     // Returns true; the value is ignored.
                     true
                 }
                 DragEvent.ACTION_DROP -> {
                     // Gets the item containing the dragged data.
                     val item: ClipData.Item = e.clipData.getItemAt(0)
+                    val indexItem: ClipData.Item = e.clipData.getItemAt(1)
                     // Gets the text data from the item.
                     val dragData = item.text
+                    val idxData = indexItem.text
+                    val view = e.getLocalState() as View
+                    if (e.getLocalState() != null) {
+                        view.visibility = VISIBLE
+                    }
                     // Displays a message containing the dragged data.
                   // Toast.makeText(this, "Dragged data is $dragData", Toast.LENGTH_LONG).show()
                     // Turns off any color tints.
                    // (v as? ImageView)?.clearColorFilter()
                     // Invalidates the view to force a redraw.
                     v.invalidate()
-                    Log.i("ACTION_DROP", "action drop fired")
-                    Log.i("dragData:","$dragData")
-                    Log.i("indexOf in ACTION_DROP", chordProgression.indexOf(img).toString())
+                    Log.i("ACTION_DROP","dragData: $dragData")
+                    Log.i("ACTION_DROP", "idxData: $idxData")
+                    if(e.localState == null){
+                        Log.d("localState check", "is null")
+                    }
+                    else{
+                        Log.d("localState check","not null")
+                    }
+                    //v.visibility = VISIBLE
                     // Returns true. DragEvent.getResult() will return true.
                     true
                 }
 
                 DragEvent.ACTION_DRAG_ENDED -> {
                     //val item: ClipData.Item = e.clipData.getItemAt(0)
-
                     // Gets the text data from the item.
                    // val dragData = item.text
                     // Turns off any color tinting.
@@ -175,9 +179,12 @@ class MainActivity : AppCompatActivity() {
 //                            Toast.makeText(this, "The drop didn't work.", Toast.LENGTH_LONG)
 //                    }.show()
 //                    v.visibility = View.VISIBLE
-                    Log.i("ACTION_DRAG_ENDED", "drag ended fired")
                    // Log.i("dragData:","$dragData")
                     // Returns true; the value is ignored.
+                    val view = e.getLocalState() as View
+                    if (e.getLocalState() != null) {
+                        view.visibility = VISIBLE
+                    }
                     true
                 }
                 else -> {
@@ -247,13 +254,12 @@ class MainActivity : AppCompatActivity() {
 
     fun createNewChordImage(){
         newChord = getImageString(addChordKey,addChordType)
-
         val resId = resources.getIdentifier(newChord, "drawable", packageName)
         nextChordImg.setImageResource(resId)
         var newImg = nextChordImg
         nextChordImg.setOnClickListener{openEditDialog(newImg) }
-        setClickListener(nextChordImg,newChord)
-        setDragListener(nextChordImg)
+        setClickListener(nextChordImg,newChord,nextChordIdx)
+        setDragListener(nextChordImg,nextChordIdx)
 
         if (nextChordIdx == 0){
             topText.visibility = View.INVISIBLE
@@ -271,7 +277,8 @@ class MainActivity : AppCompatActivity() {
         editImg.setImageResource(resId)
         var indexInProgression = chordProgression.indexOf(editImg)
         chordNames[indexInProgression] = editChord
-        setClickListener(editImg, editChord)
+        setClickListener(editImg, editChord, indexInProgression)
+        setDragListener(editImg,indexInProgression)
     }
 
     private fun openEditDialog(editImg: ImageView) {
@@ -320,6 +327,8 @@ class MainActivity : AppCompatActivity() {
             for (i in removeChordIndex until nextChordIdx - 1) {
                 chordProgression[i].setImageDrawable(chordProgression[i + 1].drawable)
                 chordNames[i] = chordNames[i+1]
+                setClickListener(chordProgression[i],chordNames[i],i)
+                setDragListener(chordProgression[i],i)
             }
         }
         //set last image to blank and update nextChordIdx so it points to where the next
