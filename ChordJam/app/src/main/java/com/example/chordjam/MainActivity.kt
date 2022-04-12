@@ -281,8 +281,16 @@ class MainActivity : AppCompatActivity() {
     fun rearrangeChordProgression( origIndex: Int, dropChordIndex: Int, chordBeingMoved: String){
         //rearrange in our chordNames string representation first to utilize built-in methods
         //makes it easier to update images in chordProgression list
+        if(origIndex + 1 == dropChordIndex){
+            return
+        }
         chordNames.removeAt(origIndex)
-        chordNames.add(dropChordIndex,chordBeingMoved)
+        if(origIndex < dropChordIndex){
+            chordNames.add(dropChordIndex - 1, chordBeingMoved)
+        }
+        else {
+            chordNames.add(dropChordIndex, chordBeingMoved)
+        }
         //update images using the chordNames list rearranged above
         for ((i,chord) in chordNames.withIndex()){
             if (chordNames[i] == ""){
