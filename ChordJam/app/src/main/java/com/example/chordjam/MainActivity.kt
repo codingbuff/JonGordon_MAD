@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    //opens window where user can save progression locally
     private fun openSaveDialog() {
         val saveBuilder = AlertDialog.Builder(this@MainActivity)
         saveBuilder.apply {
@@ -69,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         saveDialog.show()
     }
 
+    //set clickListener on image views for drag events
     private fun setClickListener(img: ImageView, imgString: String, idxOfChord: Int) {
         //taken from https://proandroiddev.com/drag-and-drop-in-android-all-you-need-to-know-6df8babfb507
         img.setOnLongClickListener { view ->
@@ -88,6 +90,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //define drag listener events
     private fun setDragListener(img: ImageView, imgIndex: Int) {
         //taken from example in docs: https://developer.android.com/guide/topics/ui/drag-drop#StartDrag
         img.setOnDragListener { v, e ->
@@ -122,13 +125,17 @@ class MainActivity : AppCompatActivity() {
                 DragEvent.ACTION_DROP -> {
                     // Gets the item containing the dragged data.
                     v.setBackgroundResource(0)
-                    val item: ClipData.Item = e.clipData.getItemAt(0)
+                    // Gets the text data from the items.
+                    val nameItem: ClipData.Item = e.clipData.getItemAt(0)
                     val indexItem: ClipData.Item = e.clipData.getItemAt(1)
-                    // Gets the text data from the item.
-                    val dragData = item.text
-                    val idxData = indexItem.text
-                    val view = e.getLocalState() as View
-                    view.setVisibility(View.VISIBLE)
+                    val chordBeingMoved = nameItem.text.toString()
+                    val origIndex = indexItem.text.toString().toInt()
+                    //rearrange chords
+                    val view = e.localState as View
+                    val dropChordIndex = chordProgression.indexOf(v)
+                    //rearrange in our chordNames string list so we can utilize string methods
+                    rearrangeChordProgression(origIndex, dropChordIndex, chordBeingMoved)
+                    view.visibility = VISIBLE
                     // Returns true. DragEvent.getResult() will return true.
                     true
                 }
@@ -196,6 +203,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //convert user input to string that represents image resource
     fun getImageString(key: String, type: String): String {
         var returnString = ""
         if (key.length == 1){
@@ -215,7 +223,7 @@ class MainActivity : AppCompatActivity() {
         nextChordImg.setOnClickListener{openEditDialog(newImg) }
         setClickListener(nextChordImg,newChord,nextChordIdx)
         setDragListener(nextChordImg,nextChordIdx)
-
+        //get rid of instructional text once chord is added
         if (nextChordIdx == 0){
             topText.visibility = View.INVISIBLE
         }
@@ -266,12 +274,37 @@ class MainActivity : AppCompatActivity() {
         editChordDialog.show()
     }
 
+    //rearrangeChordProgression updates images displayed in chord progression triggered by dragEvent
+    //Input: index of chord that's being dragged to rearrange position, the index of the chord in
+    //front of it, and the string resource name of the chord that's being dragged
+    //Outputs: Nothing, chordProgression list image resources are updated based on user input
+    fun rearrangeChordProgression( origIndex: Int, dropChordIndex: Int, chordBeingMoved: String){
+        //rearrange in our chordNames string representation first to utilize built-in methods
+        //makes it easier to update images in chordProgression list
+        chordNames.removeAt(origIndex)
+        chordNames.add(dropChordIndex,chordBeingMoved)
+        //update images using the chordNames list rearranged above
+        for ((i,chord) in chordNames.withIndex()){
+            if (chordNames[i] == ""){
+                break
+            }
+            val resId = resources.getIdentifier(chordNames[i], "drawable", packageName)
+            chordProgression[i].setImageResource(resId)
+            setClickListener(chordProgression[i],chordNames[i],i)
+            setDragListener(chordProgression[i],i)
+        }
+    }
+
+    //removeChordFromProgression removes image from chordProgression and updates listeners and
+    //image resource for every chord in progression. Method is called upon selection in editDialog
+    //Inputs: ImageView of chord to be removed
+    //Outputs: Nothing, imageviews in chordProgression list gets updated with the respected
+    //imageview resources to reflect change.
     fun removeChordFromProgression(removeChord: ImageView){
         val removeChordIndex = chordProgression.indexOf(removeChord)
-        val lastChordPosition = nextChordIdx //can't use nextChordIx to compare so doing this
+        val lastChordPosition = nextChordIdx //can't use nextChordIx to compare so using this instead
 
-        //if there's only one chord in progression, remove it and re-insert
-        //instructional text
+        //if there's only one chord in progression, remove it and re-insert instructional text
         if (lastChordPosition < 2) {
             chordProgression[0].setImageDrawable(null)
             chordNames[0] = ""
@@ -282,12 +315,13 @@ class MainActivity : AppCompatActivity() {
             for (i in removeChordIndex until nextChordIdx - 1) {
                 chordProgression[i].setImageDrawable(chordProgression[i + 1].drawable)
                 chordNames[i] = chordNames[i+1]
+                //reset our click listeners so clipboard data has correct information about chord
                 setClickListener(chordProgression[i],chordNames[i],i)
                 setDragListener(chordProgression[i],i)
             }
         }
         //set last image to blank and update nextChordIdx so it points to where the next
-        //chord should go
+        //remove click listeners for blank image and update nextChord image and index
         nextChordIdx -= 1
         chordProgression[nextChordIdx].setImageDrawable(null)
         chordNames[nextChordIdx] = ""
