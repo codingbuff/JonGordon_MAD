@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">lab8</string>
+    <string name="api_key">cb5e7f989dmsh9819eb08540e39dp162092jsnf3f3ca528f4a</string>
+    <string name="enter_word">Enter word to lookup</string>
+    <string name="dictionary">Dictionary</string>
+    <string name="pineapple">pineapple</string>
+</resources>
