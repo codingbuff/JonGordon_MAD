@@ -33,7 +33,8 @@ class JSONdata {
 
     //This API is absolutely ridiculous and I really hope that
     //you'll take a gander at this section and see what I had to deal with
-    //In short, arrays within objects with arrays with in object etc etc
+    //In short, arrays within objects with arrays within object etc, etc
+    //I'm sure there's an easier but hey, it works
     fun parseJSON(response: String, wordViewModel: WordViewModel){
         val dataList = ArrayList<Word>()
         try {
@@ -48,11 +49,14 @@ class JSONdata {
                 val definition = definitionObj.getString("definition")
                 println("definition type ${definition::class.simpleName}")
                 Log.d("definition","$definition")
+                val newDef = Word(definition)
+                dataList.add(newDef)
             }
         }
         catch (e: JSONException) {
             Log.d("exception!","didn't enter try statement")
                 e.printStackTrace()
         }
+        wordViewModel.updateList(dataList)
     }
 }

@@ -14,6 +14,7 @@
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/enter_word"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toStartOf="@+id/editWord"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +28,7 @@
         android:gravity="center"
         android:text="@string/dictionary"
         android:textAlignment="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAppearance="@style/TextAppearance.Material3.ActionBar.Title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,8 +38,9 @@
         android:layout_width="177dp"
         android:layout_height="48dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="@string/pineapple"
+        android:inputType="textPersonName"
+        android:textAppearance="@android:style/TextAppearance.Material.Inverse"
         app:layout_constraintBottom_toBottomOf="@+id/enterWord"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -47,13 +49,22 @@
 
     <Button
         android:id="@+id/submitBtn"
-        android:onClick="getDef"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="look up defintions"
+        android:textColor="@color/lightGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterWord" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submitBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
