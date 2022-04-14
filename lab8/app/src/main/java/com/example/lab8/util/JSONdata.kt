@@ -11,6 +11,7 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
+//JSON data is good, something wrong with connection to MainActivity
 class JSONdata {
     fun loadJSON(context: Context, wordViewModel: WordViewModel, searchWord: String){
         val url = "https://api.dictionaryapi.dev/api/v2/entries/en/" + searchWord
