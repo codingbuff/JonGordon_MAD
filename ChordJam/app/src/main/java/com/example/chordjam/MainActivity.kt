@@ -3,6 +3,7 @@ package com.example.chordjam
 import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipDescription
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
@@ -12,11 +13,19 @@ import android.view.View
 import android.view.View.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.dataStore
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
 
-
+private val DATA_STORE_FILE_NAME = "chord_data.pb"
+val Context.chordDataStore: DataStore<Chord> by dataStore(
+    fileName = DATA_STORE_FILE_NAME,
+    serializer = ChordSerializer
+)
 class MainActivity : AppCompatActivity() {
 
     lateinit var bottomAppBar: BottomAppBar
@@ -37,8 +46,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var chordProgression: MutableList<ImageView>
     lateinit var chordNames: MutableList<String>
     var nextChordIdx by Delegates.notNull<Int>()
+    private lateinit var viewModel: ChordViewModel
 
-    private fun saveProgression(chordProgression: MutableList<ImageView>): Boolean {
+    private fun saveProgression(chordNames: MutableList<String>): Boolean {
         //TODO: implement saveProgression
         //stores currently displayed chord progression for later use
         //will require an edit text view and transferring of data
@@ -50,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         val saveBuilder = AlertDialog.Builder(this@MainActivity)
         saveBuilder.apply {
             setPositiveButton(R.string.save) { _, _ ->
-                var progressionSaved = saveProgression(chordProgression)
+                var progressionSaved = saveProgression(chordNames)
                 val snackbar =
                     Snackbar.make(
                         getWindow().getDecorView().getRootView(),
@@ -176,6 +186,13 @@ class MainActivity : AppCompatActivity() {
         chordNames = listOf("","","","").toMutableList()
         newChord = ""
         nextChordImg = chordProgression[nextChordIdx]
+
+        viewModel = ViewModelProvider(
+            this,
+            ChordViewModelFactory(ChordRepo(chordDataStore)))[ChordViewModel::class.java]
+
+
+
         val fab: View = findViewById(R.id.addChordFab)
         fab.setOnClickListener { view ->
             if(nextChordIdx >= CAPACITY){
@@ -217,8 +234,13 @@ class MainActivity : AppCompatActivity() {
 
     fun createNewChordImage(){
         newChord = getImageString(addChordKey,addChordType)
+        viewModel.saveChord(newChord)
+
         val resId = resources.getIdentifier(newChord, "drawable", packageName)
         nextChordImg.setImageResource(resId)
+        viewModel.chord.observe(this, Observer{ chord ->
+            Snackbar.make(nextChordImg, "$chord saved!", Snackbar.LENGTH_LONG).show()
+        })
         var newImg = nextChordImg
         nextChordImg.setOnClickListener{openEditDialog(newImg) }
         setClickListener(nextChordImg,newChord,nextChordIdx)
