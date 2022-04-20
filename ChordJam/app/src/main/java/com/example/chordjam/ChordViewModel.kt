@@ -7,8 +7,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-//import androidx.lifecycle.asLiveData
-
 class ChordViewModel(private val dataStoreRepo: ChordRepo):ViewModel() {
     val chord = dataStoreRepo.myChord.asLiveData()
     fun saveChord(chord:String){

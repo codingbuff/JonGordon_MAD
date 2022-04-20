@@ -191,7 +191,9 @@ class MainActivity : AppCompatActivity() {
             this,
             ChordViewModelFactory(ChordRepo(chordDataStore)))[ChordViewModel::class.java]
 
-
+        viewModel.chord.observe( this, Observer{ myChord ->
+            topText.text = "last chord that was added: $myChord"
+        })
 
         val fab: View = findViewById(R.id.addChordFab)
         fab.setOnClickListener { view ->
@@ -238,17 +240,16 @@ class MainActivity : AppCompatActivity() {
 
         val resId = resources.getIdentifier(newChord, "drawable", packageName)
         nextChordImg.setImageResource(resId)
-        viewModel.chord.observe(this, Observer{ chord ->
-            Snackbar.make(nextChordImg, "$chord saved!", Snackbar.LENGTH_LONG).show()
-        })
+
         var newImg = nextChordImg
         nextChordImg.setOnClickListener{openEditDialog(newImg) }
         setClickListener(nextChordImg,newChord,nextChordIdx)
         setDragListener(nextChordImg,nextChordIdx)
+        //TODO: uncomment below conditional after data persistence is implemented
         //get rid of instructional text once chord is added
-        if (nextChordIdx == 0){
-            topText.visibility = View.INVISIBLE
-        }
+//        if (nextChordIdx == 0){
+//            topText.visibility = View.INVISIBLE
+//        }
         chordNames[nextChordIdx] = newChord
         nextChordIdx += 1
         if(nextChordIdx < CAPACITY){

@@ -9,12 +9,9 @@ message Chord {
 
 //message Progression {
 //  string name = 1;
-//  repeated Chord chords = 2;
+//  repeated string chords = 2;
 //}
 //
-//message ProgressionList {
-//  repeated Progression progressions = 1;
+//message ProgressionList{
+//  map<string, Progression> progressions = 1;
 //}
-
-
-
