@@ -17,15 +17,24 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.chordjam.dataGraveyard.Progressions
+import com.example.chordjam.dataGraveyard.ProgressionsRepo
+import com.example.chordjam.dataGraveyard.ProgressionsSerializer
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
-
 private val DATA_STORE_FILE_NAME = "chord_data.pb"
-val Context.chordDataStore: DataStore<Chord> by dataStore(
+
+val Context.progDataStore: DataStore<Progression> by dataStore(
     fileName = DATA_STORE_FILE_NAME,
-    serializer = ChordSerializer
+    serializer = ProgSerializer
 )
+
+//val Context.progressionsDataStore: DataStore<Progressions> by dataStore(
+//    fileName = "progressions.json",
+//    serializer = ProgressionsSerializer
+//)
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var bottomAppBar: BottomAppBar
@@ -42,17 +51,26 @@ class MainActivity : AppCompatActivity() {
     lateinit var newChord: String
     lateinit var editChord: String
     lateinit var draggedView: ImageView
+    lateinit var progressionList: MutableList<ProgItem>
     val CAPACITY = 4
     lateinit var chordProgression: MutableList<ImageView>
     lateinit var chordNames: MutableList<String>
     var nextChordIdx by Delegates.notNull<Int>()
-    private lateinit var viewModel: ChordViewModel
-
+    lateinit var usersSavedProgression: MutableList<String>
+    private lateinit var viewModel: ProgViewModel
+    //private lateinit var viewModel: ProgressionsViewModel
     private fun saveProgression(chordNames: MutableList<String>): Boolean {
-        //TODO: implement saveProgression
         //stores currently displayed chord progression for later use
-        //will require an edit text view and transferring of data
-        return true
+        //can only save one progression at a time
+
+        if(!chordNames[0].isNullOrEmpty()){
+            viewModel.editProgression(chordNames)
+            return true
+        }
+        //won't save progression if no chords are on screen
+        else{
+            return false
+        }
     }
 
     //opens window where user can save progression locally
@@ -174,6 +192,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         draggedView = findViewById(R.id.chord1)
         bottomAppBar = findViewById(R.id.bottom_app_bar)
         topText = findViewById<TextView>(R.id.instructionTextView)
@@ -184,15 +203,39 @@ class MainActivity : AppCompatActivity() {
         nextChordIdx = 0
         chordProgression = listOf(chord1Img,chord2Img,chord3Img,chord4Img).toMutableList()
         chordNames = listOf("","","","").toMutableList()
+        usersSavedProgression = emptyList<String>().toMutableList()
         newChord = ""
         nextChordImg = chordProgression[nextChordIdx]
-
+        progressionList = mutableListOf(
+            ProgItem("Basic Progression 1", mutableListOf<String>("cmaj","gmaj","amin","fmaj")),
+            ProgItem("Basic Progression 2", mutableListOf<String>("gmaj","amin","fmaj","cmaj")),
+            ProgItem("Basic Progression 3", mutableListOf<String>("amin","fmaj","cmaj","gmaj")),
+            ProgItem("Basic Progression 4", mutableListOf<String>("fmaj","cmaj","gmaj","amin")),
+            ProgItem("Doo Wop", mutableListOf<String>("cmaj","amin","fmaj","gmaj")),
+            ProgItem("Flamenco", mutableListOf<String>("amin","gmaj","fmaj","emaj")),
+            ProgItem("Jazz Standard", mutableListOf<String>("cmaj","amin","dmin","gmaj")),
+            ProgItem("La Folia", mutableListOf<String>("amin","e7","amin","gmaj")),
+            ProgItem("Pop Rock Lydian", mutableListOf<String>("cmaj","dmaj","fmaj","cmaj")),
+            ProgItem("Ragtime", mutableListOf<String>("cmaj","a7","d7","g7")),
+            ProgItem("Rock Ballad", mutableListOf<String>("cmaj","emin","fmaj","gmaj"))
+        )
         viewModel = ViewModelProvider(
             this,
-            ChordViewModelFactory(ChordRepo(chordDataStore)))[ChordViewModel::class.java]
+            ProgViewModelFactory(ProgRepo(progDataStore))
+        )[ProgViewModel::class.java]
 
-        viewModel.chord.observe( this, Observer{ myChord ->
-            topText.text = "last chord that was added: $myChord"
+        viewModel.progression.observe(this, Observer { progression ->
+            usersSavedProgression.clear()
+            usersSavedProgression.addAll(progression)
+            if(progressionList[0].name == "My Saved Progression" ){
+                progressionList[0].chords.clear()
+                progressionList[0].chords.addAll(usersSavedProgression)
+            }
+            else{
+                progressionList.add(0,ProgItem("My Saved Progression",usersSavedProgression))
+            }
+            println("usersSavedProgression: $usersSavedProgression")
+            println("progressionList: $progressionList")
         })
 
         val fab: View = findViewById(R.id.addChordFab)
@@ -236,7 +279,6 @@ class MainActivity : AppCompatActivity() {
 
     fun createNewChordImage(){
         newChord = getImageString(addChordKey,addChordType)
-        viewModel.saveChord(newChord)
 
         val resId = resources.getIdentifier(newChord, "drawable", packageName)
         nextChordImg.setImageResource(resId)
@@ -245,11 +287,10 @@ class MainActivity : AppCompatActivity() {
         nextChordImg.setOnClickListener{openEditDialog(newImg) }
         setClickListener(nextChordImg,newChord,nextChordIdx)
         setDragListener(nextChordImg,nextChordIdx)
-        //TODO: uncomment below conditional after data persistence is implemented
         //get rid of instructional text once chord is added
-//        if (nextChordIdx == 0){
-//            topText.visibility = View.INVISIBLE
-//        }
+        if (nextChordIdx == 0){
+            topText.visibility = View.INVISIBLE
+        }
         chordNames[nextChordIdx] = newChord
         nextChordIdx += 1
         if(nextChordIdx < CAPACITY){
