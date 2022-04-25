@@ -1,5 +1,6 @@
 package com.example.chordjam
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.*
 import android.os.Build
@@ -9,14 +10,16 @@ import android.view.DragEvent
 import android.view.View
 import android.view.View.*
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.chordjam.dataGraveyard.Progressions
-import com.example.chordjam.dataGraveyard.ProgressionsRepo
-import com.example.chordjam.dataGraveyard.ProgressionsSerializer
+import com.example.chordjam.data.*
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.Delegates
@@ -34,6 +37,9 @@ val Context.progDataStore: DataStore<Progression> by dataStore(
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        val SELECTED_PROGRESSION_INDEX = "selected_progression_index"
+    }
     lateinit var bottomAppBar: BottomAppBar
     lateinit var topText: TextView
     lateinit var nextChordImg: ImageView
@@ -56,6 +62,19 @@ class MainActivity : AppCompatActivity() {
     lateinit var usersSavedProgression: MutableList<String>
     private lateinit var viewModel: ProgViewModel
     //private lateinit var viewModel: ProgressionsViewModel
+
+    val getResult = registerForActivityResult(ActivityResultContracts
+        .StartActivityForResult()){ result: ActivityResult? ->
+        if(result!!.resultCode == Activity.RESULT_OK){
+            val idx = result.data to Int
+            println("idx: $idx")
+//            chordNames = progressionList.getItemAt(result).chords
+//            updateChordImages()
+        }
+
+    }
+
+
     private fun saveProgression(chordNames: MutableList<String>): Boolean {
         //stores currently displayed chord progression for later use
         //can only save one progression at a time
@@ -217,6 +236,7 @@ class MainActivity : AppCompatActivity() {
             ProgItem("Ragtime", mutableListOf<String>("cmaj","a7","d7","g7")),
             ProgItem("Rock Ballad", mutableListOf<String>("cmaj","emin","fmaj","gmaj"))
         ))
+
         viewModel = ViewModelProvider(
             this,
             ProgViewModelFactory(ProgRepo(progDataStore))
@@ -231,6 +251,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("viewModel observer","usersSavedProgression: $usersSavedProgression")
             Log.d("viewModel observer","progressionList: $progressionList")
         })
+
 
         val fab: View = findViewById(R.id.addChordFab)
         fab.setOnClickListener { view ->
@@ -249,7 +270,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.app_bar_folder -> {
                     val intent = Intent(this, savedProgressions::class.java).apply {
                         putExtra(savedProgressions.PROG_LIST,progressionList)
-                        startActivity(this)
+                        getResult.launch(this)
                     }
                     true
                 }
@@ -258,6 +279,17 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    fun updateChordImages(){
+        for(i in 0 until chordNames.size){
+            if(chordNames[i] != ""){
+                val resId = resources.getIdentifier(chordNames[i], "drawable", packageName)
+                chordProgression[i].setImageResource(resId)
+                setClickListener(chordProgression[i], chordNames[i], i)
+                setDragListener(chordProgression[i],i)
             }
         }
     }

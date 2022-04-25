@@ -1,7 +1,8 @@
-package com.example.chordjam
+package com.example.chordjam.data
 
 import android.util.Log
 import androidx.datastore.core.DataStore
+import com.example.chordjam.Progression
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map

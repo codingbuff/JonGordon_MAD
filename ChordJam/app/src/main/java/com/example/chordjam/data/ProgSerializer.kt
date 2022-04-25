@@ -1,7 +1,8 @@
-package com.example.chordjam
+package com.example.chordjam.data
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
+import com.example.chordjam.Progression
 import com.google.protobuf.InvalidProtocolBufferException
 import java.io.InputStream
 import java.io.OutputStream

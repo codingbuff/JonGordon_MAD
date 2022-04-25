@@ -1,4 +1,4 @@
-package com.example.chordjam
+package com.example.chordjam.data
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -1,6 +1,5 @@
-package com.example.chordjam
+package com.example.chordjam.data
 
-import android.os.Parcel
 import java.io.Serializable
 
 
@@ -11,7 +10,7 @@ class ProgItemList(progressionList: MutableList<ProgItem>):Serializable {
         return itemList
     }
 
-    fun getItemAt(index: Int): ProgItem{
+    fun getItemAt(index: Int): ProgItem {
         return itemList[index]
     }
 

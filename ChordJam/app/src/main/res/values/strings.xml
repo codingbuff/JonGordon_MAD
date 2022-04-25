@@ -17,6 +17,9 @@
     <string name="saveSuccess">Successfully saved</string>
     <string name="saveFail">Progression failed to save</string>
     <string name="addChordString">add chord</string>
+    <string name="okayResponse">okay</string>
+    <string name="noProgSavedTitle">Progression Not Available</string>
+    <string name="noProgSavedPrompt">A custom progression hasn\'t been saved yet. Save a progression from the main screen and click the save icon</string>
     <string-array name="keys">
         <item>"A"</item>
         <item>"A#/Bb"</item>
