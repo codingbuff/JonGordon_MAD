@@ -1,3 +1,4 @@
 package com.example.chordjam
 
-data class ProgItem(val name: String, val chords: MutableList<String>){}
+import java.io.Serializable
+class ProgItem(val name: String, val chords: MutableList<String>): Serializable {}

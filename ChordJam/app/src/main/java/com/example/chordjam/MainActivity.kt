@@ -1,10 +1,7 @@
 package com.example.chordjam
 
 import android.app.AlertDialog
-import android.content.ClipData
-import android.content.ClipDescription
-import android.content.Context
-import android.content.DialogInterface
+import android.content.*
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -51,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var newChord: String
     lateinit var editChord: String
     lateinit var draggedView: ImageView
-    lateinit var progressionList: MutableList<ProgItem>
+    lateinit var progressionList: ProgItemList
     val CAPACITY = 4
     lateinit var chordProgression: MutableList<ImageView>
     lateinit var chordNames: MutableList<String>
@@ -206,7 +203,8 @@ class MainActivity : AppCompatActivity() {
         usersSavedProgression = emptyList<String>().toMutableList()
         newChord = ""
         nextChordImg = chordProgression[nextChordIdx]
-        progressionList = mutableListOf(
+        progressionList = ProgItemList(mutableListOf(
+            ProgItem("My Saved Progression",usersSavedProgression),
             ProgItem("Basic Progression 1", mutableListOf<String>("cmaj","gmaj","amin","fmaj")),
             ProgItem("Basic Progression 2", mutableListOf<String>("gmaj","amin","fmaj","cmaj")),
             ProgItem("Basic Progression 3", mutableListOf<String>("amin","fmaj","cmaj","gmaj")),
@@ -218,7 +216,7 @@ class MainActivity : AppCompatActivity() {
             ProgItem("Pop Rock Lydian", mutableListOf<String>("cmaj","dmaj","fmaj","cmaj")),
             ProgItem("Ragtime", mutableListOf<String>("cmaj","a7","d7","g7")),
             ProgItem("Rock Ballad", mutableListOf<String>("cmaj","emin","fmaj","gmaj"))
-        )
+        ))
         viewModel = ViewModelProvider(
             this,
             ProgViewModelFactory(ProgRepo(progDataStore))
@@ -227,15 +225,11 @@ class MainActivity : AppCompatActivity() {
         viewModel.progression.observe(this, Observer { progression ->
             usersSavedProgression.clear()
             usersSavedProgression.addAll(progression)
-            if(progressionList[0].name == "My Saved Progression" ){
-                progressionList[0].chords.clear()
-                progressionList[0].chords.addAll(usersSavedProgression)
-            }
-            else{
-                progressionList.add(0,ProgItem("My Saved Progression",usersSavedProgression))
-            }
-            println("usersSavedProgression: $usersSavedProgression")
-            println("progressionList: $progressionList")
+            progressionList.getItemAt(0).chords.clear()
+            progressionList.getItemAt(0).chords.addAll(usersSavedProgression)
+
+            Log.d("viewModel observer","usersSavedProgression: $usersSavedProgression")
+            Log.d("viewModel observer","progressionList: $progressionList")
         })
 
         val fab: View = findViewById(R.id.addChordFab)
@@ -253,6 +247,11 @@ class MainActivity : AppCompatActivity() {
         bottomAppBar.setOnMenuItemClickListener{ menuItem ->
             when (menuItem.itemId) {
                 R.id.app_bar_folder -> {
+                    //TODO: open recycyler view
+                    val intent = Intent(this, savedProgressions::class.java).apply {
+                        putExtra(savedProgressions.PROG_LIST,progressionList)
+                        startActivity(this)
+                    }
                     Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
                     true
                 }
