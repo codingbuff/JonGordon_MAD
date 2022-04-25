@@ -247,12 +247,10 @@ class MainActivity : AppCompatActivity() {
         bottomAppBar.setOnMenuItemClickListener{ menuItem ->
             when (menuItem.itemId) {
                 R.id.app_bar_folder -> {
-                    //TODO: open recycyler view
                     val intent = Intent(this, savedProgressions::class.java).apply {
                         putExtra(savedProgressions.PROG_LIST,progressionList)
                         startActivity(this)
                     }
-                    Toast.makeText(this,"you clicked Load",Toast.LENGTH_LONG).show()
                     true
                 }
                 R.id.app_bar_save -> {
