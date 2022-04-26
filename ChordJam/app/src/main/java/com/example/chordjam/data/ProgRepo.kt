@@ -13,10 +13,17 @@ class ProgRepo(private val dataStore: DataStore<Progression>){
     private val TAG: String = "ProgRepo"
 
     suspend fun editProgression(chordList: MutableList<String>) {
+        val newLst = emptyList<String>().toMutableList()
+        for(chord in chordList){
+            if (chord != ""){
+                newLst.add(chord)
+            }
+        }
+        Log.d("editProgression","$newLst")
         dataStore.updateData { pref ->
             pref.toBuilder()
                 .clearChords()
-                .addAllChords(chordList)
+                .addAllChords(newLst)
                 .build()
         }
     }

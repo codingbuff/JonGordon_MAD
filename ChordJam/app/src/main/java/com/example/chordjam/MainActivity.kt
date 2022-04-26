@@ -40,6 +40,22 @@ class MainActivity : AppCompatActivity() {
     companion object {
         val SELECTED_PROGRESSION_INDEX = "selected_progression_index"
     }
+
+    //used to pass selected chord progression from savedProgressions activity
+    //to MainActivity. Updates chordNames string array which shows currently
+    //displayed images and proceeds to populate images with updateChordImages method
+    private val getResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()){result->
+            if(result.resultCode == Activity.RESULT_OK){
+                val index = result.data?.getIntExtra(SELECTED_PROGRESSION_INDEX,-1)
+                if(index != -1){
+                    chordNames = progressionList.getItemAt(index as Int).chords
+                }
+                updateChordImages()
+            }
+        }
+
+
     lateinit var bottomAppBar: BottomAppBar
     lateinit var topText: TextView
     lateinit var nextChordImg: ImageView
@@ -59,21 +75,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var chordProgression: MutableList<ImageView>
     lateinit var chordNames: MutableList<String>
     var nextChordIdx by Delegates.notNull<Int>()
-    lateinit var usersSavedProgression: MutableList<String>
     private lateinit var viewModel: ProgViewModel
     //private lateinit var viewModel: ProgressionsViewModel
-
-    val getResult = registerForActivityResult(ActivityResultContracts
-        .StartActivityForResult()){ result: ActivityResult? ->
-        if(result!!.resultCode == Activity.RESULT_OK){
-            val idx = result.data to Int
-            println("idx: $idx")
-//            chordNames = progressionList.getItemAt(result).chords
-//            updateChordImages()
-        }
-
-    }
-
 
     private fun saveProgression(chordNames: MutableList<String>): Boolean {
         //stores currently displayed chord progression for later use
@@ -219,11 +222,10 @@ class MainActivity : AppCompatActivity() {
         nextChordIdx = 0
         chordProgression = listOf(chord1Img,chord2Img,chord3Img,chord4Img).toMutableList()
         chordNames = listOf("","","","").toMutableList()
-        usersSavedProgression = emptyList<String>().toMutableList()
         newChord = ""
         nextChordImg = chordProgression[nextChordIdx]
         progressionList = ProgItemList(mutableListOf(
-            ProgItem("My Saved Progression",usersSavedProgression),
+            ProgItem("My Saved Progression", emptyList<String>().toMutableList()),
             ProgItem("Basic Progression 1", mutableListOf<String>("cmaj","gmaj","amin","fmaj")),
             ProgItem("Basic Progression 2", mutableListOf<String>("gmaj","amin","fmaj","cmaj")),
             ProgItem("Basic Progression 3", mutableListOf<String>("amin","fmaj","cmaj","gmaj")),
@@ -243,13 +245,10 @@ class MainActivity : AppCompatActivity() {
         )[ProgViewModel::class.java]
 
         viewModel.progression.observe(this, Observer { progression ->
-            usersSavedProgression.clear()
-            usersSavedProgression.addAll(progression)
             progressionList.getItemAt(0).chords.clear()
-            progressionList.getItemAt(0).chords.addAll(usersSavedProgression)
-
-            Log.d("viewModel observer","usersSavedProgression: $usersSavedProgression")
-            Log.d("viewModel observer","progressionList: $progressionList")
+            progressionList.getItemAt(0).chords.addAll(progression)
+            Log.d("viewModel observer","${progressionList.getItemAt(0).chords}")
+            updateChordImages()
         })
 
 
@@ -288,10 +287,13 @@ class MainActivity : AppCompatActivity() {
             if(chordNames[i] != ""){
                 val resId = resources.getIdentifier(chordNames[i], "drawable", packageName)
                 chordProgression[i].setImageResource(resId)
+                chordProgression[i].setOnClickListener{openEditDialog(chordProgression[i]) }
                 setClickListener(chordProgression[i], chordNames[i], i)
                 setDragListener(chordProgression[i],i)
             }
+           // topText.visibility = View.INVISIBLE
         }
+
     }
 
     //convert user input to string that represents image resource

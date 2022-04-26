@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,7 +54,7 @@ class savedProgressions : AppCompatActivity() {
             noProgSavedBuilder.apply {
                 setNegativeButton(R.string.okayResponse
                 ) { _, _ ->
-                //Nothing else to do. Display prompt and user goes back to previous screen
+                    //Nothing else to do. Display prompt and user goes back to previous screen
                 }
             }
             noProgSavedBuilder.setMessage(R.string.noProgSavedPrompt)
@@ -62,8 +63,9 @@ class savedProgressions : AppCompatActivity() {
             noProgSavedDialog.show()
         }else{
             val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
             intent.putExtra(SELECTED_PROGRESSION_INDEX,index)
-            setResult(Activity.RESULT_OK,intent)
+            setResult(RESULT_OK,intent)
             finish()
         }
     }
