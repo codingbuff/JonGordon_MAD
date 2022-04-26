@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">lab9</string>
+    <string name="enterThought">Enter a thought you\'d like to remember later.</string>
+    <string name="thoughHint">Put your million dollar idea here</string>
+    <string name="enterDateTime">Enter the date and/or time this thought popped up.</string>
+    <string name="dateTimeHint">MM/DD 00:00:00 AM/PM</string>
+    <string name="buttonText">Save thought</string>
+    <string name="appearHere">Your thought will populate here</string>
+    <string name="thoughtSaved">Thought saved</string>
+</resources>

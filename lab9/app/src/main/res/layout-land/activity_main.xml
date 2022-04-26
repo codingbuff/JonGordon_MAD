@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/addThoughtTextView"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="346dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/enterThought"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/editThought"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editThought"
+        android:layout_width="256dp"
+        android:layout_height="48dp"
+        android:ems="10"
+        android:hint="@string/thoughHint"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/addThoughtTextView"
+        app:layout_constraintTop_toTopOf="@+id/addThoughtTextView" />
+
+    <TextView
+        android:id="@+id/enterDateTimeView"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="385dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="19dp"
+        android:gravity="center"
+        android:text="@string/enterDateTime"
+        app:layout_constraintEnd_toStartOf="@+id/editDateTime"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addThoughtTextView" />
+
+    <EditText
+        android:id="@+id/editDateTime"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="440dp"
+        android:ems="10"
+        android:hint="@string/dateTimeHint"
+        android:inputType="textPersonName"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/enterDateTimeView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/enterDateTimeView" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="saveThought"
+        android:text="@string/buttonText"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editDateTime" />
+
+    <TextView
+        android:id="@+id/savedThoughtView"
+        android:layout_width="414dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/appearHere"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
