@@ -283,10 +283,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateChordImages(){
-        nextChordIdx = 0
         for(i in 0 until chordNames.size){
             if(chordNames[i] != ""){
-                nextChordIdx += 1
                 val resId = resources.getIdentifier(chordNames[i], "drawable", packageName)
                 chordProgression[i].setImageResource(resId)
                 chordProgression[i].setOnClickListener{openEditDialog(chordProgression[i]) }
@@ -295,7 +293,6 @@ class MainActivity : AppCompatActivity() {
             }
            // topText.visibility = View.INVISIBLE
         }
-        nextChordIdx += 1
     }
 
     //convert user input to string that represents image resource
