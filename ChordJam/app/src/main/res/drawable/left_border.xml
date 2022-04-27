@@ -7,7 +7,7 @@ android:insetTop="-7dp"
     android:insetRight="-7dp"
     >
 <shape xmlns:android="http://schemas.android.com/apk/res/android" android:id="@+id/rectangle">
-    <stroke android:width="7dp" android:color="#1cad34" />
+    <stroke android:width="7dp" android:color="#1976d2" />
     <corners android:bottomRightRadius="2dp"  android:bottomLeftRadius="2dp"/>
     <padding android:left="10dp" />
     <solid android:color="@android:color/transparent"/>

@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+    lateinit var chordNamesForRotation: ArrayList<String>
     lateinit var bottomAppBar: BottomAppBar
     lateinit var topText: TextView
     lateinit var nextChordImg: ImageView
@@ -282,6 +282,38 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+//        outState.putString("addChordKey", addChordKey)
+//        outState.putString("addChordType",addChordType)
+//        outState.putString("newChord",newChord)
+//        outState.putString("editChord",editChord)
+        outState.putInt("nextChordIdx",nextChordIdx)
+        val newArrLst = ArrayList<String>()
+        for (chord in chordNames){
+            newArrLst.add(chord)
+        }
+        outState.putStringArrayList("chordNames",newArrLst)
+
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+//        addChordKey = savedInstanceState.getString("addChordKey").toString()
+//        addChordType = savedInstanceState.getString("addChordType").toString()
+//        newChord = savedInstanceState.getString("newChord").toString()
+//        editChord = savedInstanceState.getString("editChord").toString()
+        nextChordIdx = savedInstanceState.getInt("nextChordIdx")
+        var arrLst = savedInstanceState.getStringArrayList("chordNames")
+        chordNames.clear()
+        if (arrLst != null) {
+            for(chord in arrLst){
+                chordNames.add(chord)
+            }
+        }
+        updateChordImages()
+    }
+
     fun updateChordImages(){
         for(i in 0 until chordNames.size){
             if(chordNames[i] != ""){
@@ -291,7 +323,6 @@ class MainActivity : AppCompatActivity() {
                 setClickListener(chordProgression[i], chordNames[i], i)
                 setDragListener(chordProgression[i],i)
             }
-           // topText.visibility = View.INVISIBLE
         }
     }
 
