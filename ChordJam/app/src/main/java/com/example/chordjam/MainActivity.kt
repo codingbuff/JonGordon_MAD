@@ -37,6 +37,7 @@ val Context.progDataStore: DataStore<Progression> by dataStore(
 
 class MainActivity : AppCompatActivity() {
 
+    //used as key for passing data between activities
     companion object {
         val SELECTED_PROGRESSION_INDEX = "selected_progression_index"
     }
@@ -55,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    lateinit var chordNamesForRotation: ArrayList<String>
     lateinit var bottomAppBar: BottomAppBar
     lateinit var topText: TextView
     lateinit var nextChordImg: ImageView
@@ -76,13 +76,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var chordNames: MutableList<String>
     var nextChordIdx by Delegates.notNull<Int>()
     private lateinit var viewModel: ProgViewModel
-    //private lateinit var viewModel: ProgressionsViewModel
 
     private fun saveProgression(chordNames: MutableList<String>): Boolean {
         //stores currently displayed chord progression for later use
         //can only save one progression at a time
-
-        if(!chordNames[0].isNullOrEmpty()){
+        if(!chordNames.isNullOrEmpty() && !chordNames[0].isNullOrEmpty()){
             viewModel.editProgression(chordNames)
             return true
         }
@@ -221,7 +219,7 @@ class MainActivity : AppCompatActivity() {
         chord4Img = findViewById<ImageView>(R.id.chord4)
         nextChordIdx = 0
         chordProgression = listOf(chord1Img,chord2Img,chord3Img,chord4Img).toMutableList()
-        chordNames = listOf("","","","").toMutableList()
+        chordNames = emptyList<String>().toMutableList()
         newChord = ""
         nextChordImg = chordProgression[nextChordIdx]
         progressionList = ProgItemList(mutableListOf(
@@ -247,8 +245,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.progression.observe(this, Observer { progression ->
             progressionList.getItemAt(0).chords.clear()
             progressionList.getItemAt(0).chords.addAll(progression)
-            Log.d("viewModel observer","${progressionList.getItemAt(0).chords}")
-            updateChordImages()
+          //  updateChordImages()
         })
 
 
@@ -284,25 +281,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-//        outState.putString("addChordKey", addChordKey)
-//        outState.putString("addChordType",addChordType)
-//        outState.putString("newChord",newChord)
-//        outState.putString("editChord",editChord)
         outState.putInt("nextChordIdx",nextChordIdx)
         val newArrLst = ArrayList<String>()
         for (chord in chordNames){
             newArrLst.add(chord)
         }
         outState.putStringArrayList("chordNames",newArrLst)
-
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-//        addChordKey = savedInstanceState.getString("addChordKey").toString()
-//        addChordType = savedInstanceState.getString("addChordType").toString()
-//        newChord = savedInstanceState.getString("newChord").toString()
-//        editChord = savedInstanceState.getString("editChord").toString()
         nextChordIdx = savedInstanceState.getInt("nextChordIdx")
         var arrLst = savedInstanceState.getStringArrayList("chordNames")
         chordNames.clear()
@@ -335,6 +323,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+        if(chordProgression.size > chordNames.size){
+            for(i in chordNames.size until chordProgression.size){
+                chordProgression[i].setImageDrawable(null)
+                chordProgression[i].setOnClickListener(null)
+                chordProgression[i].setOnDragListener(null)
+                chordProgression[i].setOnLongClickListener(null)
+            }
+        }
     }
 
     //convert user input to string that represents image resource
@@ -363,7 +359,7 @@ class MainActivity : AppCompatActivity() {
         if (nextChordIdx == 0){
             topText.visibility = View.INVISIBLE
         }
-        chordNames[nextChordIdx] = newChord
+        chordNames.add(nextChordIdx,newChord)
         nextChordIdx += 1
         if(nextChordIdx < CAPACITY){
             nextChordImg = chordProgression[nextChordIdx]
@@ -451,7 +447,7 @@ class MainActivity : AppCompatActivity() {
         //if there's only one chord in progression, remove it and re-insert instructional text
         if (lastChordPosition < 2) {
             chordProgression[0].setImageDrawable(null)
-            chordNames[0] = ""
+            chordNames.removeAt(0) //[0] = ""
             topText.visibility = View.VISIBLE
         }
         //fill in spots where chord got removed by setting each image to the one in front of it
@@ -468,7 +464,7 @@ class MainActivity : AppCompatActivity() {
         //remove click listeners for blank image and update nextChord image and index
         nextChordIdx -= 1
         chordProgression[nextChordIdx].setImageDrawable(null)
-        chordNames[nextChordIdx] = ""
+        chordNames.removeAt(nextChordIdx) //[nextChordIdx] = ""
         chordProgression[nextChordIdx].setOnClickListener(null)
         chordProgression[nextChordIdx].setOnDragListener(null)
         chordProgression[nextChordIdx].setOnLongClickListener(null)

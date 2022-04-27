@@ -16,6 +16,7 @@ import com.example.chordjam.data.ProgItemList
 
 class savedProgressions : AppCompatActivity() {
 
+    //used as key for passing data between activities
     companion object{
         val PROG_LIST = "progression_list_passed"
     }
@@ -23,15 +24,7 @@ class savedProgressions : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_saved_progressions)
-
         val progItemList = intent.getSerializableExtra(PROG_LIST) as ProgItemList
-
-        //for loop used to debug
-        for (item in progItemList.getItems()){
-            Log.d("progItem name", "${item.name}")
-            Log.d("progItem chords", "${item.chords}")
-        }
-
         val recyclerView:RecyclerView = findViewById(R.id.progressionsRecyclerView)
         recyclerView.addItemDecoration(DividerItemDecoration(this,LinearLayoutManager.VERTICAL))
 
@@ -43,7 +36,6 @@ class savedProgressions : AppCompatActivity() {
         }
 
         recyclerView.adapter = adapter
-
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     }

@@ -19,7 +19,6 @@ class ProgRepo(private val dataStore: DataStore<Progression>){
                 newLst.add(chord)
             }
         }
-        Log.d("editProgression","$newLst")
         dataStore.updateData { pref ->
             pref.toBuilder()
                 .clearChords()
