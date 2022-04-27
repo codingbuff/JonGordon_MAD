@@ -315,13 +315,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateChordImages(){
+        if(chordNames.isNullOrEmpty()){
+            topText.visibility = View.INVISIBLE
+        }
+        nextChordImg = chordProgression[0]
+        nextChordIdx = 0
         for(i in 0 until chordNames.size){
             if(chordNames[i] != ""){
+                newChord = chordNames[i]
                 val resId = resources.getIdentifier(chordNames[i], "drawable", packageName)
-                chordProgression[i].setImageResource(resId)
-                chordProgression[i].setOnClickListener{openEditDialog(chordProgression[i]) }
+                nextChordImg.setImageResource(resId)
+                var newImg = nextChordImg
+                nextChordImg.setOnClickListener{openEditDialog(newImg) }
                 setClickListener(chordProgression[i], chordNames[i], i)
                 setDragListener(chordProgression[i],i)
+                nextChordIdx += 1
+                if(nextChordIdx < CAPACITY){
+                    nextChordImg = chordProgression[nextChordIdx]
+                }
             }
         }
     }
